@@ -1,0 +1,35 @@
+<div *ngIf="allPrograms" [@fadeOutIn]>
+    <div class="px-3 lg:pb-5 mt-4 lg:mt-0 my-card">
+        <div class="card"
+            style="height:320px; padding:2px; border-radius:10px; background: linear-gradient(90deg, rgba(253, 228, 165, 0.2),rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2),rgba(187, 199, 205, 0.2));">
+            <a [routerLink]="['program', allPrograms.programTracking?.trackingId]">
+                <div class="p-3 surface-card h-full" style="border-radius:8px;">
+                    <div class="card-img">
+                        <img (error)="appUI.programImageError($event)" [src]="imageBaseURL + allPrograms.image"
+                            alt="">
+                    </div>
+                    <h5 class="mb-2 text-900">{{allPrograms.name}}</h5>
+                    <div>
+                        <span class="text-600" *ngFor="let trainer of allPrograms.trainers; let i = index">
+                            {{trainer.name}}{{ (i < allPrograms.trainers!.length - 1)? ', ' : '' }} 
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!allPrograms">
+    <div class="px-3 lg:pb-5 mt-4 lg:mt-0">
+        <div>
+            <div class="p-3 surface-card h-full" style="border-radius:8px;">
+                <div class="card-img">
+                    <p-skeleton width="25rem" height="14rem"></p-skeleton>
+                </div>
+                <h5 class="mb-2 text-900"><p-skeleton></p-skeleton></h5>
+                <p class="text-600"><p-skeleton></p-skeleton></p>
+            </div>
+        </div>
+    </div>
+</div>

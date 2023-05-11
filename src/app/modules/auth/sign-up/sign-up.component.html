@@ -1,0 +1,345 @@
+<div *ngIf="isLoading == false"
+    class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div style="border-radius:56px">
+            <div class="card-width surface-card py-8 px-2 sm:py-8 flex flex-column align-items-center"
+                style="border-radius:53px">
+                <div class="text-900 text-3xl font-medium mb-3 text-center">
+                    LMS
+                </div>
+                <span class="text-600 font-medium mb-5">Register as a new user</span>
+                <div class="w-full">
+                    <p-steps [model]="talentFormService.formStpes" [activeIndex]="activatedIndex"
+                        [readonly]="true"></p-steps>
+                    <div class="grid p-fluid my-5">
+                        <div class="col-12 md:col-8 mx-auto p-4"> <!-- Step 1 -->
+                            <form [formGroup]="signUpForms[0]" *ngIf="activatedIndex == 0">
+                                <div class="step-heading mb-5 text-2xl text-center">
+                                    Personal Details
+                                </div>
+                                <div>
+                                    <div class="p-float-label my-2">
+                                        <input id="name" type="text" formControlName="name" pInputText>
+                                        <label for="name">Full Name*</label>
+                                    </div>
+                                </div>
+                                <div class="grid mt-5">
+                                    <div class="col-12 mb-2 lg:col-3 lg:mb-0">
+                                        <div class="p-float-label">
+                                            <input id="age" type="number" formControlName="age" min="14" max="60"
+                                                pInputText>
+                                            <label for="age">Age*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-3 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-dropdown appendTo="body" [options]="talentFormService.genders" placeholder="Gender"
+                                                formControlName="gender" [filter]="false"></p-dropdown>
+                                            <label for="p-float-label">Gender*</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-3 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-dropdown appendTo="body" [options]="talentFormService.countries" placeholder="Country"
+                                                formControlName="countryName" [filter]="false"></p-dropdown>
+                                            <label for="p-float-label">Country*</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-3 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-multiSelect appendTo="body" styleClass="p-float-label"
+                                                [options]="talentFormService.languages" formControlName="knownLanguages"
+                                                [filter]="false" placeholder="Language" [filter]="false"
+                                                class="multiselect-custom">
+                                                <ng-template let-language pTemplate="item">
+                                                    <div class="flex align-items-center">
+                                                        <span class="ml-2">{{language.label}}</span>
+                                                    </div>
+                                                </ng-template>
+                                            </p-multiSelect>
+                                            <label for="p-float-label">Languages*</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form> <!-- Step 2 -->
+                            <form [formGroup]="signUpForms[1]" *ngIf="activatedIndex == 1">
+                                <div class="step-heading mb-5 text-2xl text-center">
+                                    Professional Details
+                                </div>
+                                <div class="grid my-2">
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-dropdown
+                                                [options]="talentFormService.signUpFormBuildingData.currentProfessionalStatus"
+                                                placeholder="Professinal Status"
+                                                formControlName="currentProfessionalStatus"></p-dropdown>
+                                            <label for="p-float-label">Professinal Status*</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-dropdown
+                                                [options]="talentFormService.signUpFormBuildingData.industryType"
+                                                placeholder="Type of Industry"
+                                                formControlName="industryType"></p-dropdown>
+                                            <label for="p-float-label">Type of Industry*</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+                                        <div class="p-float-label">
+                                            <input id="experience" type="number" formControlName="yearOfExperience"
+                                                min="0" max="60" pInputText>
+                                            <label for="experience">Years of Experience*</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid my-2">
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+                                        <div class="p-float-label my-2">
+                                            <input id="currentEmployer" type="text"
+                                                formControlName="currentEmployerName" pInputText>
+                                            <label for="currentEmployer">Current Employer*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+                                        <div class="p-float-label my-2">
+                                            <input id="linkedinProfile" type="url" formControlName="linkedInProfileLink"
+                                                pInputText>
+                                            <label for="linkedinProfile">LinkedIn Profile*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+                                        <div class="p-float-label my-2">
+                                            <input id="recordedVideo" type="url" formControlName="recordedVideoLink"
+                                                pInputText>
+                                            <label for="recordedVideo">Recorded Video Link*</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid my-2">
+                                    <div class="col-12 mb-2 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-multiSelect appendTo="body" styleClass="p-float-label" display="chip"
+                                                [options]="talentFormService.signUpFormBuildingData.skills"
+                                                formControlName="skills" [filter]="true" placeholder="Skills"
+                                                [showClear]="true" class="multiselect-custom">
+                                                <ng-template let-skill pTemplate="item">
+                                                    <div class="flex align-items-center">
+                                                        <span class="ml-2">{{skill.label}}</span>
+                                                    </div>
+                                                </ng-template>
+                                            </p-multiSelect>
+                                            <label for="p-float-label">Skills*</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="grid my-2">
+                                    <div class="col-12 mb-2 lg:col-6 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-dropdown
+                                                [options]="talentFormService.signUpFormBuildingData.experienceInIT"
+                                                placeholder="Experience in IT" formControlName="experienceInIT"
+                                                [filter]="false"></p-dropdown>
+                                            <label for="p-float-label">Experience in IT*</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-6 lg:mb-0 text-center">
+                                        Experience Level: {{talentFormService.experienceLevel}}
+                                        <input type="text" style="display: none;">
+                                        <p-slider [step]="20" formControlName="experienceLevel"
+                                            (onChange)="talentFormService.setExperienceLevel($event)"></p-slider>
+                                        <div class="my-3 flex w-full" style="justify-content: space-between;">
+                                            <div>0</div>
+                                            <div>0 = Not Good and 5 = Excellent</div>
+                                            <div>5</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> <!-- Step 3 -->
+                            <form [formGroup]="signUpForms[2]" *ngIf="activatedIndex == 2">
+                                <div class="step-heading mb-5 text-2xl text-center">
+                                    Educational Details
+                                </div>
+                                <ng-template matStepLabel>Educational Details</ng-template>
+                                <div>
+                                    <div *ngFor="let c of talentFormService.eduControls; let i=index">
+                                        <div class="grid my-2 card">
+                                            <div class="col-12 mb-2 lg:col-4 lg:mb-0"
+                                                [formGroup]="talentFormService.eduControls[i]">
+                                                <span class="p-float-label">
+                                                    <p-dropdown appendTo="body" [options]="talentFormService.nameOfDegree"
+                                                        placeholder="Degree" [filter]="false"
+                                                        formControlName="nameOfDegree"></p-dropdown>
+                                                    <label for="p-float-label">Degree*</label>
+                                                </span>
+                                            </div>
+                                            <div class="col-12 mb-2 lg:col-4 lg:mb-0"
+                                                [formGroup]="talentFormService.eduControls[i]">
+                                                <span class="p-float-label">
+                                                    <p-dropdown appendTo="body" [options]="talentFormService.nameOfUniversity"
+                                                        placeholder="University" [filter]="false"
+                                                        formControlName="nameOfUniversity"></p-dropdown>
+                                                    <label for="p-float-label">University*</label>
+                                                </span>
+                                            </div>
+                                            <div class="col-12 mb-2 lg:col-3 lg:mb-0"
+                                                [formGroup]="talentFormService.eduControls[i]">
+                                                <div class="p-float-label">
+                                                    <input id="yearOfPassing" type="number"
+                                                        formControlName="yearOfPassing" pInputText>
+                                                    <label for="yearOfPassing">Year of Passing*</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-2 lg:col-1 lg:mb-0">
+                                                <p-button icon="pi pi-trash"
+                                                    styleClass="p-button-rounded p-button-danger"
+                                                    (onClick)="talentFormService.removeEducationalField(i)"></p-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <p-button icon="pi pi-plus" styleClass="p-button-rounded"
+                                            [disabled]="signUpForms[2].invalid"
+                                            (onClick)="talentFormService.addEducationalField()"></p-button>
+                                    </div>
+                                </div>
+                            </form> <!-- Step 4 -->
+                            <form [formGroup]="signUpForms[3]" *ngIf="activatedIndex == 3">
+                                <div class="step-heading mb-5 text-2xl text-center">
+                                    Expectations
+                                </div>
+                                <div class="grid my-2">
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-dropdown
+                                                [options]="talentFormService.signUpFormBuildingData.fieldSpecialization"
+                                                [filter]="false" placeholder="Field Specialization"
+                                                formControlName="fieldSpecialization"></p-dropdown>
+                                            <label for="p-float-label">Field Specialization*</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+                                        <span class="p-float-label">
+                                            <p-dropdown appendTo="body" [options]="talentFormService.skillSpecialization"
+                                                [filter]="false" placeholder="Skill Specialization"
+                                                formControlName="skillSpecialization"></p-dropdown>
+                                            <label for="p-float-label">Skill Specialization*</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-2 lg:col-4 lg:mb-0 flex align-items-center">
+                                        <span class="mx-2">Profile:</span>
+                                        <input type="file" name="profileImageUpload" id="profileImageUpload" accept=".png, .jpeg, .jpg, gif"
+                                            (change)="talentFormService.onProfilePictureUpload($event)"
+                                            #profileImageUpload style="display: none;">
+                                        <div class="mx-2" *ngIf="talentFormService.profileImageLink == ''">
+                                            <p-button label="Upload" (onClick)="profileImageUpload.click()"
+                                                icon="pi pi-plus"
+                                                [loading]="talentFormService.isProfileUploading"></p-button>
+                                            <p-progressBar mode="determinate" [style]="{height: '6px'}"
+                                                [showValue]="false" *ngIf="talentFormService.isProfileUploading == true"
+                                                [value]="talentFormService.profileImageProgressStatus"></p-progressBar>
+                                        </div>
+                                        <div class="" *ngIf="talentFormService.profileImageLink != ''">
+                                            <span class="p-input-icon-right ml-auto">
+                                                <i class="pi pi-times cursor-pointer"
+                                                    (click)="talentFormService.removeProfilePicture()"></i>
+                                                <input pInputText #searchInput type="text" [readOnly]="true"
+                                                    [value]="talentFormService.profileImageLink" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> <!-- Step 5 -->
+                            <form [formGroup]="signUpForms[4]" *ngIf="activatedIndex == 4">
+                                <div class="step-heading mb-5 text-2xl text-center">
+                                    Credentials
+                                </div>
+                                <div class="my-2">
+                                    <div style="margin: 0 auto;" class="col-12 md:col-6 lg:mb-0">
+                                        <div>
+                                            <div class="p-float-label my-2">
+                                                <input id="email" type="text" formControlName="email" pInputText>
+                                                <label for="email">Email*</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin: 0 auto;" class="col-12 md:col-6 lg:mb-0">
+                                        <div>
+                                            <div class="p-float-label my-2">
+                                                <input id="password" type="password" formControlName="password"
+                                                    pInputText>
+                                                <label for="password">Password*</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> <!-- Navigation buttons -->
+                            <div class="flex justify-content-center gap-5 mt-5">
+                                <p-button label="Previous" *ngIf="activatedIndex !== 0"
+                                    (click)="previousStep()"></p-button>
+                                <p-button [label]="activatedIndex < signUpForms.length - 1 ?'Next' : 'Sign Up'"
+                                    (onClick)="activatedIndex < signUpForms.length - 1 ?  nextStep() : talentFormService.finalSubmission()"
+                                    [disabled]="signUpForms[activatedIndex].invalid || talentFormService.isSubmitting == true"></p-button>
+                                <!-- <p-button [label]="activatedIndex < signUpForms.length - 1 ?'Next' : 'Sign Up'"
+                                    (onClick)="activatedIndex < signUpForms.length - 1 ?  nextStep() : talentFormService.finalSubmission()"></p-button> -->
+                            </div>
+                            <div class="text-center mt-5">
+                                <span class="text-600 font-medium">Already have Account? <a routerLink="../login">Log In</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="isLoading == true"
+    class="surface-ground flex align-items-center justify-content-center min-h-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div style="border-radius:56px">
+            <div class="card-width surface-card py-8 px-2 sm:py-8 flex flex-column align-items-center"
+                style="border-radius:53px">
+                <div class="text-900 text-3xl font-medium mb-3 text-center"> LMS </div>
+                <div class="flex w-full my-4 justify-content-center align-items-center gap-7">
+                    <p-skeleton shape="circle" size="4rem"></p-skeleton>
+                    <p-skeleton shape="circle" size="4rem"></p-skeleton>
+                    <p-skeleton shape="circle" size="4rem"></p-skeleton>
+                    <p-skeleton shape="circle" size="4rem"></p-skeleton>
+                    <p-skeleton shape="circle" size="4rem"></p-skeleton>
+                </div>
+                <div class="w-full">
+                    <div class="grid p-fluid my-5">
+                        <div class="col-12 md:col-8 mx-auto p-4">
+                            <div>
+                                <div class="p-float-label my-2">
+                                    <p-skeleton height="4rem"></p-skeleton>
+                                </div>
+                            </div>
+                            <div class="grid mt-5">
+                                <div class="col-12 mb-2 lg:col-3 lg:mb-0">
+                                    <div class="p-float-label">
+                                        <p-skeleton height="4rem"></p-skeleton>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-3 lg:mb-0"> <span class="p-float-label"> <p-skeleton
+                                            height="4rem">
+                                        </p-skeleton> </span>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-3 lg:mb-0"> <span class="p-float-label"> <p-skeleton
+                                            height="4rem">
+                                        </p-skeleton> </span>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-3 lg:mb-0"> <span class="p-float-label"> <p-skeleton
+                                            height="4rem">
+                                        </p-skeleton> </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

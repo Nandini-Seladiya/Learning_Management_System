@@ -1,0 +1,88 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+    <button pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined"
+        (click)="location.back()"></button>{{'View Trainer Profile' | translate}}
+</div>
+
+<div *ngIf="isLoading == false">
+
+    <div *ngIf="!trainerData" class="text-2xl text-center">
+        {{'No Data Available' | translate}}
+    </div>
+
+    <div #trainerDetails class="details-container ">
+        <div class="lhs-front-content card">
+            <div class="avatar-preview">
+                <img id="imagePreview" [src]="imageBaseURL + trainerData.profileImage"
+                    (error)="appUI.imageError($event)" />
+            </div>
+            <h3>{{trainerData.name}}</h3>
+            <p-button class="editBtn" [routerLink]="userType == 'Admin' ? ['../../edit', trainerData.id] : ['edit-trainer']" label="Edit Profile"
+                styleClass="p-button-outlined" icon="pi pi-user-edit" iconPos="right"></p-button>
+        </div>
+        <div class="rhs-front-content">
+            <div class="trainer-data card">
+
+                <div class="grid-div">
+                    <div class="row1 col1">
+                        <div class="main-details-row">
+                            <i class="pi pi-at" style="font-size: 1rem"></i>
+                            <p>{{'Email' | translate}}: <span>{{trainerData.email}}</span> </p>
+
+                        </div>
+                        <!-- <p-divider layout="vertical"></p-divider> -->
+                        <div class="main-details-row">
+                            <i class="pi pi-users" style="font-size: 1rem"></i>
+                            <p>{{'Gender' | translate}}: <span>{{trainerData.gender}}</span> </p>
+                        </div>
+                        <!-- <p-divider layout="vertical"></p-divider> -->
+                        <div class="main-details-row">
+                            <i class="pi pi-flag" style="font-size: 1rem"></i>
+                            <p>{{'Country' | translate}}: <span>{{trainerData.countryName}}</span> </p>
+                        </div>
+                    </div>
+                    <p-divider layout="vertical"></p-divider>
+                    <div class="row1 col2">
+                        <div class="main-details-row">
+                            <i class="pi pi-id-card" style="font-size: 1rem"></i>
+                            <p>{{'Age' | translate}}: <span>{{trainerData.age}}</span> </p>
+                        </div>
+                        <div class="main-details-row">
+                            <i class="pi pi-chart-bar" style="font-size: 1rem"></i>
+                            <p>{{'Years of Experience' | translate}}: <span>{{trainerData.yearOfExperience}}</span> </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="trainer-data card">
+                <div class="grid-div">
+                    <div class="row-data-flex">
+                        <h4>{{'LinkedIn Profile' | translate}} </h4>
+                        <div>
+                            <a href="{{trainerData.linkedInProfileLink}}" class="title-flex-div">
+                                <i class="pi pi-linkedin" style="font-size: 1rem"></i>
+                                <h4>LinkedIn</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <p-divider layout="vertical"></p-divider>
+                    <div class="row-data-flex">
+                        <h4>{{'Recorded profile video' | translate}}</h4>
+                        <div>
+                            <a href="{{trainerData.recordedVideoLink}}" class="title-flex-div">
+                                <i class="pi pi-video" style="font-size: 1rem"></i>
+                                <h4>{{'Video Link' | translate}}</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="isLoading == true">
+	<shared-profile-skeleton></shared-profile-skeleton>
+	<dashboard-program-table></dashboard-program-table>
+</div>

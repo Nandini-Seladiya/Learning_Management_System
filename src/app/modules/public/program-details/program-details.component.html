@@ -1,0 +1,137 @@
+<!-- original theme -->
+<div *ngIf="programDetails">
+    <div class="grid grid-nogutter header text-800">
+        <div class="col-12 md:col-6 p-6 program-herder-content text-center md:text-left flex align-items-center header"
+            [ngStyle]="{background:headerBgProperty}">
+            <section>
+                <div class="header-content" (window:resize)="onResize($event)">
+                    <h1 class="program-title">{{programDetails.name}}</h1>
+                    <div class="program-sub-title">
+                        <div class="program-sub-container">
+                            <i class="pi pi-history" style="color: 'var(--surface-e); font-size: 1rem;'"></i>
+                            <p>Duration: </p>
+                            <p id="program-duration-text">{{programDetails.duration}}</p>
+                        </div>
+                        <div class="program-sub-container">
+                            <i class="pi pi-users" style="color: 'var(--surface-e) font-size: 1.5rem'"></i>
+                            <p>Total Enrollments: </p>
+                            <p id="program-enrollment-text">{{programDetails.totalEnrolledTalents}}</p>
+                        </div>
+                    </div>
+                    <button #enrollBtn *ngIf="programDetails.programTracking?.isEnrolled == false" id="enrollBtn" pButton
+                        label="Enroll Program"
+                        styleClass="p-button-raised" (click)="onEnrollClicked(enrollBtn)"></button>
+                </div>
+            </section>
+        </div>
+        <div class="col-12 md:col-6 overflow-hidden program-img-sec header">
+            <img [src]="imageBaseURL + programDetails.image" alt="program thumbnail image"
+                class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
+        </div>
+    </div>
+
+
+    <!-- program details section -->
+    <div class="container">
+        <div class="lhs-container">
+
+            <div class="card program-description">
+                <div class="title-flex-div">
+                    <i class="pi pi-book" style="font-size: 1.7rem"></i>
+                    <h3 class="title-font">Program Description</h3>
+                </div>
+                <p>{{programDetails.programOverview}}
+                </p>
+            </div>
+
+
+            <div class="card program-skills">
+                <div class="title-flex-div">
+                    <i class="pi pi-chart-pie" style="font-size: 1.7rem"></i>
+                    <h3 class="title-font">Skills</h3>
+                </div>
+                <div class="skillList">
+                    <ul>
+                        <li *ngFor="let skill of programDetails.skillsList">{{skill}}</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="rhs-container">
+
+            <div class="card trainer-details-sec" *ngFor="let trainer of programDetails.trainers">
+                <div class="trainer-card">
+                    <div class="img">
+                        <img [src]="imageBaseURL + trainer.profileImage">
+                    </div>
+                    <div class="infos">
+                        <div class="name">
+                            <h2>Name: {{trainer.name}}</h2>
+                            <p>Email: {{trainer.email}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template *ngIf="!programDetails">
+
+    <!-- skeleton theme -->
+    <div class="card skeleton-header">
+        <div class="skeleton-header-content">
+            <p-skeleton height="4rem"></p-skeleton>
+            <br>
+            <p-skeleton width="70%" height="2rem" styleClass="mb-2"></p-skeleton>
+            <div class="program-sub-title">
+                <div class="program-sub-container">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="skeleton-lhs-container">
+            <div class="card">
+                <div class="program-description">
+                    <p-skeleton width="30%" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <div class="multi-row-div">
+                        <p-skeleton styleClass="mb-2"></p-skeleton>
+                        <p-skeleton styleClass="mb-2"></p-skeleton>
+                        <p-skeleton styleClass="mb-2"></p-skeleton>
+                        <p-skeleton styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="80%" styleClass="mb-2"></p-skeleton>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+
+                <div class="program-skills">
+                    <p-skeleton width="30%" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <div class="skillList">
+                        <div class="multi-column-div">
+                            <p-skeleton width="3rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                            <p-skeleton width="3rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                            <p-skeleton width="3rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="skeleton-rhs-container">
+            <div class="trainer-details-sec">
+                <div class="card">
+                    <div class="flex">
+                        <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        <div style="flex: 1">
+                            <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton width="75%"></p-skeleton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

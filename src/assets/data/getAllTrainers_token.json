@@ -1,0 +1,68 @@
+[
+    {
+        "name": "Trainer 1",
+        "id": 1,
+        "programs": [
+            {
+                "id": 1,
+                "name": "Program Name 1",
+                "thumbnailImageURL": "www.abc.com",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": false,
+                    "startDate": "",
+                    "endDate": ""
+                }
+            },
+            {
+                "id": 2,
+                "name": "Program Name 2",
+                "thumbnailImageURL": "www.abc.com",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": true,
+                    "startDate": "",
+                    "endDate": ""
+                }
+            }
+        ],
+        "yearOfExperience": 5,
+        "email": "assdf",
+        "profileImage": ""
+    },
+    {
+        "name": "Trainer 2",
+        "id": 2,
+        "programs": [
+            {
+                "id": 1,
+                "name": "Program Name 1",
+                "thumbnailImageURL": "www.abc.com",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": false,
+                    "startDate": "",
+                    "endDate": ""
+                }
+            },
+            {
+                "id": 2,
+                "name": "Program Name 3",
+                "thumbnailImageURL": "www.abc.com",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": true,
+                    "startDate": "",
+                    "endDate": ""
+                }
+            }
+        ],
+        "yearOfExperience": 5,
+        "email": "assdf",
+        "profileImage": ""
+    }
+]

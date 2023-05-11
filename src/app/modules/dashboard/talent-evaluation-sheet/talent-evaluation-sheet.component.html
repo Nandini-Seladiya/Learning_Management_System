@@ -1,0 +1,68 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+    <button pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined" routerLink="../"></button>Evaluation
+</div>
+
+<div class="card" #tableContainer *ngIf="isLoading == false">
+    <p-table scrollDirection="both" [scrollable]="true" responsiveLayout="scroll" #evaluationSheet [value]="tableData"
+        [paginator]="true" [rows]="5" [alwaysShowPaginator]="false" [showPageLinks]="false"
+        [showCurrentPageReport]="true" [showFirstLastIcon]="false" [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['talentName1']" [rowsPerPageOptions]="[5, 10, 25, 50]">
+        <ng-template pTemplate="caption">
+            <div class="md:flex align-items-center gap-2">
+                <button pButton pRipple type="button" (click)="exportAsExcel()">{{'Download' | translate}}</button>
+                <span class="flex align-items-center gap-2" *ngIf="isSubmitting == true">
+                    <i class="pi pi-spin pi-spinner m-2" style="font-size: 2rem"></i>
+                    {{'Saving...' | translate}}
+                </span>
+                <span class="flex align-items-center gap-2" *ngIf="isSubmitting == false && firstSubmit == false">
+                    <i class="pi pi-check m-2" style="font-size: 2rem"></i>
+                    {{'Saved' | translate}}!
+                </span>
+                <span class="p-input-icon-right my-2 md:my-0 ml-auto">
+                    <i *ngIf="searchInput.value != ''" (click)="clear(evaluationSheet); searchInput.value = ''"
+                        class="pi pi-times cursor-pointer"></i>
+                    <i *ngIf="searchInput.value == ''" class="pi pi-search"></i>
+                    <input pInputText #searchInput type="text" (input)="searchValue($event)"
+                        placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr pRowGroupHeader>
+                <th *ngFor="let head of mainColumns; let i = index" [attr.colspan]="subColCounts[i]">
+                    <div class="flex align-items-center">
+                        {{head.name | translate}}
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th *ngFor="let shead of subColumns; let i = index">
+                    <div class="flex align-items-center">
+                        {{shead.name}}
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-talent>
+            <tr>
+                <td *ngFor="let c of subColumns; let i = index">
+                    <input type="number" min="0" max="10" pInputText *ngIf="c.id !== 'talentName1'" style="height: 30px; width: 70px;" [value]="talent[c.id]" (change)="updateEvaluation($event, talent.talentID, c.id, i)">
+                    <span type="text" *ngIf="c.id == 'talentName1'">{{talent[c.id]}}</span>
+                    <span type="text" *ngIf="c.id !== 'talentName1'" style="display: none; width: 0px;">{{talent[c.id]}}</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td [attr.colspan]="subColumns.length">{{'No data found' | translate}}.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<!-- skeleton screen for loading -->
+<div *ngIf="isLoading == true">
+    <shared-table-skeleton></shared-table-skeleton>
+</div>

@@ -1,0 +1,17 @@
+.card-width {
+    width: 70vw;
+}
+
+.step-heading {
+    display: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .card-width {
+        width: 95vw;
+    }
+
+    .step-heading {
+        display: block;
+    }
+}

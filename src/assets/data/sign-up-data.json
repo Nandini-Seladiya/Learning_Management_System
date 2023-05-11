@@ -1,0 +1,100 @@
+{
+    "currentProfessionalStatus": [
+        {
+            "value": 1,
+            "label": "Working"
+        },
+        {
+            "value": 2,
+            "label": "On a break"
+        },
+        {
+            "value": 3,
+            "label": "Studying"
+        }
+    ],
+    "industryType": [
+        {
+            "value": 1,
+            "label": "Financial"
+        },
+        {
+            "value": 2,
+            "label": "IT"
+        },
+        {
+            "value": 3,
+            "label": "Education"
+        },
+        {
+            "value": 4,
+            "label": "Manufacturing"
+        },
+        {
+            "value": 5,
+            "label": "Other"
+        }
+    ],
+    "experienceInIT": [
+        {
+            "value": 1,
+            "label": "No experience"
+        },
+        {
+            "value": 2,
+            "label": "Basic Coding"
+        },
+        {
+            "value": 3,
+            "label": "Moderate Coding"
+        },
+        {
+            "value": 4,
+            "label": "Expert Coding"
+        },
+        {
+            "value": 5,
+            "label": "Leadership"
+        }
+    ],
+    "fieldSpecialization": [
+        {
+            "value": 1,
+            "label": "Technologist"
+        },
+        {
+            "value": 2,
+            "label": "Business Analyst"
+        },
+        {
+            "value": 3,
+            "label": "Quality Assurance"
+        },
+        {
+            "value": 4,
+            "label": "UI/UX"
+        },
+        {
+            "value": 5,
+            "label": "Support"
+        }
+    ],
+    "skills": [
+        {
+            "value": 1,
+            "label": "Angular"
+        },
+        {
+            "value": 2,
+            "label": "Nodejs"
+        },
+        {
+            "value": 3,
+            "label": "Java"
+        },
+        {
+            "value": 4,
+            "label": "Spring Boot"
+        }
+    ]
+}

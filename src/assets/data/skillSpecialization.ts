@@ -1,0 +1,1 @@
+export const SKILL_SPECIALIZATION = ['Technical', 'Non-Technical']

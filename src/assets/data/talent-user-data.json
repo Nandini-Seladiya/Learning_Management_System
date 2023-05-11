@@ -1,0 +1,47 @@
+{
+    "personalDetails": {
+        "name": "himanshu",
+        "gender": "male",
+        "countryName": "India",
+        "age": 17
+    },
+    "educationDetails": [
+        {
+            "nameOfDegree": "BCA",
+            "nameOfUniversity": "GTU",
+            "yearOfPassing": "2021"
+        },
+        {
+            "nameOfDegree": "MCA",
+            "nameOfUniversity": "GTU",
+            "yearOfPassing": "2023"
+        }
+    ],
+    "professionalDetails": {
+        "currentProfessionalStatus": 1,
+        "industryType": 1,
+        "yearOfExperience": 15,
+        "currentEmployerName": "Jay bhai",
+        "linkedInProfileLink": "www.linkedInProfileLink.com",
+        "recordedVideoLink": "www.edu.com",
+        "experienceInIT": 1,
+        "experienceLevel": 3,
+        "skills": [
+            1,
+            2
+        ]
+    },
+    "otherDetails": {
+        "knownLanguages": [
+            1,
+            2
+        ],
+        "fieldSpecialization": 1,
+        "skillSpecialization": "Technical",
+        "profileImage": "www.abc.com"
+    },
+    "credentials": {
+        "email": "yegfyegfygefg@asite.com",
+        "id": 1
+    }
+}

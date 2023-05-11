@@ -1,0 +1,84 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div style="border-radius:56px">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                <div class="text-center mb-5">
+                    <div class="text-900 text-3xl font-medium mb-3">LMS</div>
+                    <span class="text-600 font-medium">Login to continue</span>
+                </div>
+
+                <form [formGroup]="loginForm" (submit)="formSubmission(loginForm, 1)">
+
+                    <div class="mb-5">
+                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
+                        <input id="email1" type="text" placeholder="Email address" pInputText formControlName="email"
+                            [ngClass]="{'ng-invalid ng-dirty': loginForm.get('email')?.invalid}"
+                            class="w-full md:w-30rem" style="padding:1rem">
+
+                        <div *ngIf="(loginForm.get('email')?.invalid && loginForm.get('email')?.touched)"
+                            class="my-3 text-sm flex align-items-center gap-2 p-error">
+                            <i class="pi pi-exclamation-circle"></i>
+                            Enter valid email.
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
+                        <div class="mb-5">
+                            <span class="p-input-icon-right ml-auto w-full md:w-30rem">
+                                <input pInputText #passwordInput type="password" placeholder="Password"
+                                    formControlName="password" class="w-full md:w-30rem"
+                                    [ngClass]="{'ng-invalid ng-dirty': loginForm.get('password')?.invalid && loginForm.get('password')?.dirty}">
+                                <i *ngIf="passwordInput.type == 'password'" (click)="passwordInput.type = 'text'"
+                                    class="pi pi-eye cursor-pointer"></i>
+                                <i *ngIf="passwordInput.type == 'text'" (click)="passwordInput.type = 'password'"
+                                    class="pi pi-eye-slash cursor-pointer"></i>
+                            </span>
+                            <div *ngIf="(loginForm.get('password')?.invalid && loginForm.get('password')?.touched)"
+                                class="my-3 text-sm flex align-items-center gap-2 p-error">
+                                <i class="pi pi-exclamation-circle"></i>
+                                Enter valid password.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <a class="cursor-pointer" (click)="forgetPasswordDialogDisplay=true"
+                            style="color: var(--primary-color)">Forgot password?</a>
+                    </div>
+                    <div class="flex justify-content-center">
+                        <p-button label="Log In" type="submit" styleClass="p-button-lg" [loading]="isSubmitting1"
+                            [disabled]="loginForm.invalid"></p-button>
+                    </div>
+
+                </form>
+
+                <div class="text-center mt-5">
+                    <span class="text-600 font-medium">Not having Account? <a routerLink="../sign-up">Sign Up</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Password Reset" [(visible)]="forgetPasswordDialogDisplay" [modal]="true" showEffect="fade"
+    [style]="{width: 'fit-content'}" [breakpoints]="{'960px': '75vw'}">
+    <form [formGroup]="forgetPasswordForm" (submit)="formSubmission(forgetPasswordForm, 2)">
+        <div class="mb-5">
+            <label for="email2" class="block text-900 text-xl font-medium mb-2">Email</label>
+            <input id="email12" type="text" placeholder="Email address" pInputText
+                formControlName="email"
+                [ngClass]="{'ng-invalid ng-dirty': forgetPasswordForm.get('email')?.invalid}"
+                class="w-full md:w-30rem" style="padding:1rem">
+
+            <div *ngIf="(forgetPasswordForm.get('email')?.invalid && forgetPasswordForm.get('email')?.touched)"
+                class="my-3 text-sm flex align-items-center gap-2 p-error">
+                <i class="pi pi-exclamation-circle"></i>
+                Enter valid email.
+            </div>
+        </div>
+        <div class="flex justify-content-center">
+            <p-button label="Send Reset Link" type="submit" styleClass="p-button" [loading]="isSubmitting2"
+                [disabled]="forgetPasswordForm.invalid"></p-button>
+        </div>
+    </form>
+</p-dialog>

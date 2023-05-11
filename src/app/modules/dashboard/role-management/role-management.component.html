@@ -1,0 +1,96 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+    {{'Role Management' | translate}}
+</div>
+<div *ngIf="isLoading == false" class="card">
+    <!-- if the length of provided data is 0 -->
+    <div *ngIf="noDataAvailable == true" class="text-2xl text-center">
+        {{'No Data Available' | translate}}
+    </div>
+
+    <div *ngIf="noDataAvailable == false" class="md:flex align-items-center mb-4 gap-4">
+        <button pButton pRipple (click)="displayAddRole = true">
+            {{'Add Role' | translate}}
+        </button>
+        <span class="flex align-items-center gap-2" *ngIf="isSubmitting == true">
+            <i class="pi pi-spin pi-spinner m-2" style="font-size: 2rem"></i>
+            {{'Saving...' | translate}}
+        </span>
+        <span class="flex align-items-center gap-2" *ngIf="isSubmitting == false && firstSubmit == false">
+            <i class="pi pi-check m-2" style="font-size: 2rem"></i>
+            {{'Saved' | translate}}!
+        </span>
+    </div>
+    <p-accordion [multiple]="true" *ngIf="userRoles.length > 0">
+
+        <p-accordionTab *ngFor="let r of userRoles" [header]="r.name!" [selected]="false" class="line-height-3 m-0">
+            <div class="flex flex-column">
+                <div class="grid p-fluid">
+                    <div class="col-12">
+                        <div class="my-3 text-lg text-muted">
+                            {{'Role Description' | translate}}: <span class="text-500">{{r.description}}</span>
+                        </div>
+                        <div class="my-2">
+                            <p-multiSelect display="chip" placeholder="Select Permissions" [options]="permissions"
+                                [filter]="true" [(ngModel)]="r.permissions"
+                                (onChange)="permissionsChange(r.permissions!, r.id)" [showClear]="true"
+                                class="multiselect-custom">
+                                <ng-template let-permissions pTemplate="item">
+                                    <div class="flex align-items-center">
+                                        <span class="ml-2">{{permissions.label}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p-button label="{{'Delete' | translate}}" styleClass="p-button-danger" (click)="deleteRole(r.name!,r.id)"></p-button>
+        </p-accordionTab>
+    </p-accordion>
+
+</div>
+
+<!-- Skeleton -->
+<shared-accordion-skeleton *ngIf="isLoading == true"></shared-accordion-skeleton>
+
+<!-- Dialog -->
+<p-dialog header="{{'Add New Role' | translate}}" [(visible)]="displayAddRole" [modal]="true" showEffect="fade" [style]="{width: '500px'}"
+    [breakpoints]="{'960px': '75vw'}">
+    <form [formGroup]="roleForm" (submit)="addNewRoleFormSubmission(roleForm)">
+        <div class="field">
+            <div class="gird p-fluid mt-2">
+                <div class="mb-2 col-12">
+                    <div class="p-float-label">
+                        <input id="name" type="text" formControlName="name" pInputText>
+                        <label for="name">{{'Role Name' | translate}}*</label>
+                    </div>
+                </div>
+                <div class="mb-2 col-12">
+                    <div class="p-float-label">
+                        <input id="description" type="text" formControlName="description" pInputText>
+                        <label for="description">{{'Role Description' | translate}}*</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p-multiSelect display="chip" appendTo="body" placeholder="Select Permissions"
+                        [options]="permissions" [filter]="true" formControlName="permissions" [showClear]="true"
+                        class="multiselect-custom">
+                        <ng-template let-permissions pTemplate="item">
+                            <div class="flex align-items-center">
+                                <span class="ml-2">{{permissions.label}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <p-button type="submit" [disabled]="roleForm.invalid || isSubmitting == true" label="{{'Add Role' | translate}}">
+            </p-button>
+        </div>
+    </form>
+</p-dialog>
+
+<p-confirmDialog header="{{'Delete' | translate}}" key="confirm1" icon="pi pi-exclamation-triangle" [style]="{width: '350px'}"
+    acceptButtonStyleClass="p-button-text" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>

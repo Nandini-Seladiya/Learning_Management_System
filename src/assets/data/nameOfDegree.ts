@@ -1,0 +1,1 @@
+export const DEGREES = ['B. TECH', 'M. TECH', 'B. E.', 'M. E.', 'BCA', 'MCA', 'BScIT', 'MScIT', 'Other']

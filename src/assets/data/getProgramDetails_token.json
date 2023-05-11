@@ -1,0 +1,31 @@
+{
+    "id": 1,
+    "name": "Program 1",
+    "trainers": [
+        {
+            "id": 1,
+            "name": "Trainer 1",
+            "email": "asdf",
+            "profileImage": "www.abc.com"
+        },
+        {
+            "id": 2,
+            "name": "Trainer 1",
+            "email": "asdf",
+            "profileImage": "www.abc.com"
+        }
+    ],
+    "image": "main image url of program",
+    "skillsList": [1,5,8],
+    "programTracking": {
+        "isPublished": true,
+        "isStarted": true,
+        "isEnded": true,
+        "startDate": "January 21, 2023",
+        "endDate": "March 21, 2023"
+    },
+    "duration": "3 Month",
+    "programOverview": "string",
+    "totalEnrolledTalents": 122,
+    "isEnrolled": true
+}

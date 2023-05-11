@@ -1,0 +1,273 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+	<button pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined"
+		(click)="location.back()"></button>View Talent Profile
+</div>
+
+<div *ngIf="isLoading == false">
+
+	<div *ngIf="!talentData" class="text-2xl text-center">
+        {{'No Data Available' | translate}}
+    </div>
+
+	<div *ngIf="talentData">
+		<div class="grid">
+
+			<div class="col-12 md:col-6">
+				<div class="card profile-view">
+					<img (error)="appUI.imageError($event)" class=""
+						[src]="(talentData.otherDetails?.profileImage && talentData.otherDetails?.profileImage !== '') ? imageBaseURL + talentData.otherDetails?.profileImage: 'assets/images/placeholders/profile-icon.jpg'"
+						alt="talent-photo">
+					<div class="title-edit-group">
+						<div class="title">
+							<h2>{{talentData.personalDetails.name}}</h2>
+						</div>
+						<br>
+						<button pButton pRipple type="button" label="{{'Edit Profile' | translate}}" class="p-button-raised"
+						[routerLink]="userType == 'Admin' ? ['../../edit', talentData.credentials.id] : ['edit-talent']"></button>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-12 md:col-6">
+				<div class="card info-section ">
+					<h2><i class="pi pi-user"></i> {{'Personal Details' | translate}}</h2>
+					<hr>
+					<table>
+						<tr>
+							<td>
+								<p>{{'Email' | translate}}:</p>
+							</td>
+							<td>
+								<p> {{talentData.credentials.email}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'ID' | translate}}:</p>
+							</td>
+							<td>
+								<p> {{talentData.credentials.id}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Age' | translate}}: </p>
+							</td>
+							<td>
+								<p> {{talentData.personalDetails.age}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Gender' | translate}}:</p>
+							</td>
+							<td>
+								<ng-container *ngFor="let g of genders">
+									<p *ngIf="talentData.personalDetails.gender == g.value"> {{g.label}}</p>
+								</ng-container>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Country' | translate}}:</p>
+							</td>
+							<td>
+								<p> {{talentData.personalDetails.countryName}}</p>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="col-12 md:col-6">
+
+				<div class="card info-section">
+					<h2><i class="pi pi-building"></i> {{'Professional Details' | translate}}</h2>
+					<hr>
+					<table class="info-section-1">
+						<tr>
+							<td>
+								<p>{{'Current status' | translate}}:</p>
+							</td>
+							<td>
+								<ng-container *ngFor="let d of metadata.currentProfessionalStatus">
+									<p *ngIf="talentData.professionalDetails?.currentProfessionalStatus == d.value">
+										{{d.label}}</p>
+								</ng-container>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Experience In IT' | translate}}:</p>
+							</td>
+							<td>
+								<ng-container *ngFor="let d of metadata.experienceInIT">
+									<p *ngIf="talentData.professionalDetails?.experienceInIT == d.value"> {{d.label}}
+									</p>
+								</ng-container>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Industry' | translate}}: </p>
+							</td>
+							<td>
+								<ng-container *ngFor="let d of metadata.industryType">
+									<p *ngIf="talentData.professionalDetails?.industryType == d.value"> {{d.label}}</p>
+								</ng-container>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Years of Experience' | translate}}:</p>
+							</td>
+							<td>
+								<p> {{talentData.professionalDetails?.yearOfExperience}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Current Employer' | translate}}: </p>
+							</td>
+							<td>
+								<p>{{talentData.professionalDetails?.currentEmployerName}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'LinkedIn Profile' | translate}}: </p>
+							</td>
+							<td>
+								<p><a href="{{talentData.professionalDetails?.linkedInProfileLink}}" target="_blank"><i
+											class="pi pi-linkedin"></i> Linked In</a></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Recorded video link' | translate}}: </p>
+							</td>
+							<td>
+								<p><a [href]="talentData.professionalDetails?.recordedVideoLink" target="_blank"><i
+											class="pi pi-video"></i> {{'Play Video' | translate}}</a>
+								</p>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="col-12 md:col-6">
+				<div class="card info-section">
+					<h2><i class="pi pi-home"></i> {{'Education Details' | translate}}</h2>
+					<hr>
+					<div class="grid p-2">
+						<div *ngFor="let education of talentData.educationDetails" style="height: fit-content;"
+							class="card col-12 md:col-5 mx-2">
+							<table>
+								<tr>
+									<td>
+										<p>{{'Degree' | translate}}:</p>
+									</td>
+									<td>
+										<p> {{education.nameOfDegree}}</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p>{{'University' | translate}}:</p>
+									</td>
+									<td>
+										<p> {{education.nameOfUniversity}}</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p>{{'Year of passing' | translate}}: </p>
+									</td>
+									<td>
+										<p> {{education.yearOfPassing}}</p>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 md:col-6">
+
+				<div class="card talent-details-skills info-section skill-section">
+					<h2><i class="pi pi-cog"></i> Skills</h2>
+					<hr>
+					<div class="skills-list">
+						<ng-container *ngFor="let s of metadata.skills">
+							<ng-container *ngFor="let j of talentData.professionalDetails?.skills; let i = index">
+								<p-chip *ngIf="j == s.value" label={{s.label}} styleClass="m-1"></p-chip>
+							</ng-container>
+						</ng-container>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-12 md:col-6">
+				<div class="card info-section">
+					<h2><i class="pi pi-info-circle"></i> Other Details</h2>
+					<hr>
+					<table>
+						<tr>
+							<td>
+								<p>{{'Known languages' | translate}}:</p>
+							</td>
+							<td>
+								<ng-container *ngFor="let d of languages">
+									<ng-container
+										*ngFor="let j of talentData.otherDetails?.knownLanguages; let i = index">
+										<span *ngIf="j == d.value">{{d.label}}{{(i <
+												talentData.otherDetails?.knownLanguages?.length! - 1)? ', ' : ''
+												}}</span>
+									</ng-container>
+								</ng-container>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Field specialization' | translate}}:</p>
+							</td>
+							<td>
+								<ng-container *ngFor="let d of metadata.fieldSpecialization">
+									<p *ngIf="talentData.otherDetails?.fieldSpecialization == d.value">
+										{{d.label}}
+									</p>
+								</ng-container>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>{{'Skill specialization' | translate}}: </p>
+							</td>
+							<td>
+								<p> {{talentData.otherDetails?.skillSpecialization}}</p>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="card">
+			<h2>{{'Enrolled Programs' | translate}}</h2>
+			<dashboard-program-table *ngIf="isLoading == false" [trainerNames]="trainerNames"
+				[programs]="programs"></dashboard-program-table>
+		</div>
+
+	</div>
+</div>
+
+<!-- Skeleton -->
+
+<div *ngIf="isLoading == true">
+	<shared-profile-skeleton></shared-profile-skeleton>
+	<dashboard-program-table></dashboard-program-table>
+</div>

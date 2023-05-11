@@ -1,0 +1,42 @@
+[
+    {
+        "email": "abc@sadf",
+        "id": 1,
+        "name": "string",
+        "role": {
+            "name": "Sub admin1",
+            "id": 2,
+            "privilages": [1,2,3,4,5,6,7]
+        }
+    },
+    {
+        "email": "abc@sadf",
+        "id": 1,
+        "name": "string",
+        "role": {
+            "name": "Sub admin",
+            "id": 3,
+            "privilages": [1,2,3,4,5,6,7]
+        }
+    },
+    {
+        "email": "abc@sadf",
+        "id": 1,
+        "name": "string",
+        "role": {
+            "name": "Sub admin",
+            "id": 4,
+            "privilages": [1,2,3,4,5,6,7]
+        }
+    },
+    {
+        "email": "abc@sadf",
+        "id": 1,
+        "name": "string",
+        "role": {
+            "name": "Sub admin",
+            "id": 5,
+            "privilages": [1,2,3,4,5,6,7]
+        }
+    }
+]

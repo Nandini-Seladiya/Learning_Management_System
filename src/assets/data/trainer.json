@@ -1,0 +1,21 @@
+{
+    "summaryCards": {
+        "programs": 24,
+        "talents": 356,
+        "rank": 4
+    },
+    "barGraph": {
+        "labels": ["Program1", "Program2", "Program3", "Program4", "Program5"],
+        "datasets": [{
+            "label": "Enrolled Talents",
+            "data": [100, 45, 66, 59, 80]
+        }]
+    },
+
+    "pieChart": {
+        "labels": ["Program1", "Program2", "Program3"],
+        "datasets": {
+            "data": [540, 325, 702]
+        }
+    }
+}

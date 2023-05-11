@@ -1,0 +1,79 @@
+{
+    "personalDetails": {
+        "name": "himanshu",
+        "gender": "male",
+        "countryName": "India",
+        "age": 17
+    },
+    "educationDetails": [
+        {
+            "nameOfDegree": "BCA",
+            "nameOfUniversity": "GTU",
+            "yearOfPassing": "2021"
+        },
+        {
+            "nameOfDegree": "MCA",
+            "nameOfUniversity": "GTU",
+            "yearOfPassing": "2023"
+        }
+    ],
+    "professionalDetails": {
+        "currentProfessionalStatus": 1,
+        "industryType": 1,
+        "yearOfExperience": 15,
+        "currentEmployerName": "Jay bhai",
+        "linkedInProfileLink": "https://www.linkedInProfileLink.com",
+        "recordedVideoLink": "www.edu.com",
+        "experienceInIT": 1,
+        "experienceLevel": 3,
+        "skills": [
+            1,
+            2
+        ]
+    },
+    "otherDetails": {
+        "knownLanguages": [
+            1,
+            2
+        ],
+        "fieldSpecialization": 1,
+        "skillSpecialization": "Technical",
+        "profileImage": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+    },
+    "credentials": {
+        "email": "yegfyegfygefg@asite.com",
+        "id": 1
+    },
+    "enrolledPrograms": [
+        {
+            "id": 1,
+            "name": "Program Name 1",
+            "thumbnailImageURL": "www.abc.com",
+            "programTracking": {
+                "isPublished": true,
+                "isStarted": true,
+                "isEnded": false,
+                "startDate": "",
+                "endDate": ""
+            },
+            "grades": {
+                "overallGrades": ""
+            }
+        },
+        {
+            "id": 2,
+            "name": "Program Name 2",
+            "thumbnailImageURL": "www.abc.com",
+            "programTracking": {
+                "isPublished": true,
+                "isStarted": true,
+                "isEnded": true,
+                "startDate": "",
+                "endDate": ""
+            },
+            "grades": {
+                "overallGrades": "C"
+            }
+        }
+    ]
+}

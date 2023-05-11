@@ -1,0 +1,57 @@
+{
+    "summaryCards": {
+        "programs": 12,
+        "talents": 147,
+        "trainers": 13
+    },
+    "barGraph": {
+        "labels": [],
+        "datasets": [
+            {
+                "label": "Enrolled Talents",
+                "data": [10, 45, 66, 59, 80]
+            },
+            {
+                "label": "Actual Talents",
+                "data": [80, 30, 62, 45, 70]
+            }
+        ]
+    },
+
+    "pieChart": {
+        "labels": ["Active", "Completed", "Upcoming"],
+        "datasets": {
+            "data": [540, 325, 702]
+        }
+    },
+
+    "topTalents": [
+        {
+            "program": "Angular",
+            "data": [
+                { "rank": 1, "name": "Lily", "image": "logo-dark.svg" }
+            ]
+        },
+        {
+            "program": "Java",
+            "data": [
+            { "rank": 1, "name": "Reene", "image": "logo-dark.svg" },
+            { "rank": 2, "name": "Bella", "image": "logo-dark.svg" },
+            { "rank": 3, "name": "Jack", "image": "logo-dark.svg" },
+            { "rank": 4, "name": "Sue", "image": "logo-dark.svg" },
+            { "rank": 5, "name": "Henry", "image": "logo-dark.svg" }
+            ]
+        },
+        {
+            "program": "SQL",
+            "data": [
+            { "rank": 1, "name": "Mason", "image": "logo-dark.svg" },
+            { "rank": 2, "name": "Harper", "image": "logo-dark.svg" },
+            { "rank": 3, "name": "Avery", "image": "logo-dark.svg" },
+            { "rank": 4, "name": "Wyatt", "image": "logo-dark.svg" },
+            { "rank": 5, "name": "Carter", "image": "logo-dark.svg" }
+            ]
+        }
+    ]
+}
+

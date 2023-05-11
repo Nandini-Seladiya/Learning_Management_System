@@ -1,0 +1,25 @@
+<div *ngIf="showResetPassword == false" class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div style="border-radius:56px">
+            <div class="w-full surface-card py-8 px-5 sm:px-8 flex flex-column align-items-center" style="border-radius:53px">
+                <div class="grid flex flex-column align-items-center">
+                    <div class="text-900 text-3xl font-medium mb-3">LMS</div>
+                    <div class="flex justify-content-center align-items-center bg-blue-400 border-circle my-2" style="width:3.2rem; height:3.2rem;">
+                        <i class="text-50 pi pi-fw pi-lock text-2xl"></i>
+                    </div>
+                    <h1 class="text-900 font-bold text-4xl lg:text-5xl my-4" *ngIf="isVerifying == true">Veryfying...</h1>
+                    <h1 class="text-900 font-bold text-4xl lg:text-5xl my-4" *ngIf="isVerifying == false && success == true">Verification Successful</h1>
+                    <h1 class="text-900 font-bold text-4xl lg:text-5xl my-4" *ngIf="isVerifying == false && success == false">Verification Unsccessful</h1>
+                    <span class="text-600 mb-5" *ngIf="isVerifying == true">We are veryfying your email. Please wait.</span>
+                    <span class="text-600 mb-5" *ngIf="isVerifying == false && success == true">We have veryfied your email. Please Login to continue.</span>
+                    <span class="text-600 mb-5" *ngIf="isVerifying == false && success == false">Something went wrong. Please try registering again.</span>
+                    <img src="assets/images/access/asset-access.svg" alt="Access denied" class="mb-5" width="80%">
+                    <div class="text-900 font-bold text-2xl my-4" *ngIf="isVerifying == false && success == true">Redirecting in {{redirectSeconds | showSeconds}}...</div>
+                    <button pButton pRipple label="Login to continue" *ngIf="isVerifying == false" class="p-button-text" [routerLink]="['/auth/login']"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<auth-reset-password *ngIf="showResetPassword == true" [token]="token"></auth-reset-password>

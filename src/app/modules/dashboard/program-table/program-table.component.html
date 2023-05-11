@@ -1,0 +1,261 @@
+<div class="card" *ngIf="programs" [@fadeOutIn]>
+
+    <!-- if the length of provided data is 0 -->
+    <div *ngIf="programs.length == 0" class="text-2xl">
+        <button pButton type="button" *ngIf="columnFields.includes('programCRUD')"
+        routerLink="add-program">{{'New Program' | translate}}</button>
+        <div class="w-full text-center">
+            {{'No Data Available' | translate}}
+        </div>
+    </div>
+
+    <!-- if length of provided data is > 0 -->
+    <div *ngIf="programs.length > 0">
+
+        <!-- Actual Reusable Table -->
+        <p-table scrollDirection="both" [scrollable]="true" responsiveLayout="scroll" #programsTable [value]="programs"
+            [paginator]="true" [rows]="5" [alwaysShowPaginator]="false" [showPageLinks]="false"
+            [showCurrentPageReport]="true" [showFirstLastIcon]="false" [tableStyle]="{ 'min-width': '50rem' }"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="columnFields" [rowsPerPageOptions]="[5, 10, 25, 50]">
+
+            <!-- table upper section -->
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center flex-wrap gap-3">
+
+                    <!-- add new program button -->
+                    <button pButton type="button" *ngIf="columnFields.includes('programCRUD')"
+                        routerLink="add-program">{{'New Program' | translate}}</button>
+
+                    <!-- multiselect option for viewing programs trainer wise -->
+                    <p-multiSelect display="chip" *ngIf="trainerNames && columnFields.includes('trainers')"
+                        placeholder="Filter By Trainers"
+                        (onChange)="programsTable.filterGlobal($event.value, 'has-trainer');"
+                        (onClear)="programsTable.clear()" [options]="trainerNames" [filter]="true" [showClear]="true"
+                        class="multiselect-custom">
+                        <ng-template let-trainer pTemplate="item">
+                            <div class="flex align-items-center">
+                                <span class="ml-2">{{trainer.label}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+
+                    <!-- search input -->
+                    <span class="p-input-icon-right md:ml-auto">
+                        <i *ngIf="searchInput.value != ''" (click)="clear(programsTable); searchInput.value = ''"
+                            class="pi pi-times cursor-pointer"></i>
+                        <i *ngIf="searchInput.value == ''" class="pi pi-search"></i>
+                        <input pInputText #searchInput type="text" (input)="searchValue($event)"
+                            placeholder="Search Program" />
+                    </span>
+                </div>
+            </ng-template>
+
+            <!-- Table header with conditional columns -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="flex align-items-center" pFrozenColumn>
+                            {{'ID' | translate}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            {{'Program Name' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('trainers')">
+                        <div class="flex align-items-center">
+                            {{'Trainers' | translate}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            {{'Skills List' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('dateRange')">
+                        <div class="flex align-items-center">
+                            {{'Start-End Dates' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('overallGrades')">
+                        <div class="flex align-items-center">
+                            {{'Overall Grades' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('viewGrades')">
+                        <div class="flex align-items-center">
+                            {{'View Grades' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('evaluate')">
+                        <div class="flex align-items-center">
+                            {{'Evaluate' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('activation') || columnFields.includes('publication')">
+                        <div class="flex align-items-center">
+                            {{'Action' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('programCRUD')">
+                        <div class="flex align-items-center">
+                            {{'Edit / Delete' | translate}}
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <!-- actual table content with conditional columns according data -->
+            <ng-template pTemplate="body" let-program let-i="rowIndex">
+                <tr>
+                    <td pFrozenColumn>
+                        <span *ngIf="columnFields.includes('dateRange') == true">
+                            {{ program.programTracking.trackingId }}
+                        </span>
+                        <span *ngIf="columnFields.includes('dateRange') == false">
+                            {{ program.id }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="flex gap-2 align-items-center">
+                            <p-avatar (onImageError)="appUI.programImageError($event)"
+                                [image]="(program.image && program.image !== '') ? imageBaseURL + program.image: 'assets/images/placeholders/profile-icon.jpg'"
+                                size="large" shape="circle"></p-avatar>
+                            <a *ngIf="allowLink == true && userType == 'Admin'" [routerLink]="[program.programTracking.trackingId]" rel="noopener noreferrer">
+                                <span class="cursor-pointer">
+                                    {{ program.name }}
+                                </span>
+                            </a>
+                            <a *ngIf="allowLink == true && userType !== 'Admin'" [routerLink]="['/program', program.programTracking.trackingId]" target="_blank" rel="noopener noreferrer">
+                                <span class="cursor-pointer">
+                                    {{ program.name }}
+                                </span>
+                            </a>
+                            <span *ngIf="allowLink == false">
+                                {{ program.name }}
+                            </span>
+                        </div>
+                    </td>
+
+                    <td style="max-width: 25rem;" *ngIf="columnFields.includes('trainers')">
+                        <div class="flex gap-2 align-items-center">
+                            <p-avatarGroup>
+                                <p-avatar *ngFor="let trainer of program.trainers | slice:0:2 ; let i = index" (onImageError)="appUI.imageError($event)"
+                                    [image]="(program.trainers[i].profileImage && program.trainers[i].profileImage !== '') ? imageBaseURL + program.trainers[i].profileImage: 'assets/images/placeholders/profile-icon.jpg'"
+                                    size="large" shape="circle"></p-avatar>
+                            </p-avatarGroup>
+                            <span>{{program.trainerNames}}</span>
+                        </div>
+                    </td>
+
+                    <td>{{ program.skillsList }}</td>
+
+                    <td *ngIf="columnFields.includes('dateRange') && program.programTracking.startDate && program.programTracking.endDate">{{ program.programTracking.startDate }} - {{
+                        program.programTracking.endDate }}
+                    </td>
+
+                    <td *ngIf="columnFields.includes('overallGrades')">{{ program.overallGrades ? program.overallGrades : '-' }}</td>
+
+                    <td *ngIf="columnFields.includes('viewGrades')">
+                        <button pButton pRipple [routerLink]="[program.programTracking.trackingId]" type="button">{{'View Grades' | translate}}</button>
+                    </td>
+
+                    <td *ngIf="columnFields.includes('evaluate')">
+                        <button pButton pRipple [routerLink]="[program.programTracking.trackingId]" type="button">{{'Evaluate' | translate}}</button>
+                    </td>
+
+                    <td *ngIf="columnFields.includes('activation')">
+                        <button pButton pRipple *ngIf="program.programTracking.isStarted == true" (click)="programScheduleCancel((columnFields.includes('dateRange') == true)? program.programTracking.trackingId: program.id, 2, i)"
+                            class="p-button-danger" type="button">{{'Stop' | translate}}</button>
+                        <button pButton pRipple *ngIf="program.programTracking.isStarted == false"
+                            (click)="activateProgram((columnFields.includes('dateRange') == true)? program.programTracking.trackingId: program.id, i)" type="button">Start</button>
+                    </td>
+
+                    <td *ngIf="columnFields.includes('publication')">
+                        <button pButton pRipple *ngIf="program.programTracking.isActive == true" class="p-button-danger" (click)="programScheduleCancel((columnFields.includes('dateRange') == true)? program.programTracking.trackingId: program.id, 1, i)"
+                            type="button">{{'Unpublish' | translate}}</button>
+                        <button pButton pRipple *ngIf="program.programTracking.isActive == false"
+                            (click)="publishProgram(program.id, i)" type="button">{{'Publish' | translate}}</button>
+                    </td>
+
+                    <td *ngIf="columnFields.includes('programCRUD')">
+                        <div class="flex gap-2">
+                            <button pButton pRipple type="button" [routerLink]="['edit', program.id]"
+                                icon="pi pi-pencil" class="p-button-rounded"></button>
+                            <button pButton pRipple type="button" icon="pi pi-trash"
+                                (click)="deleteProgram(program.name, program.id, i)"
+                                class="p-button-rounded p-button-danger"></button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <!-- if search result returns no data -->
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="5">{{'No data found' | translate}}.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<!-- skeleton screen for loading -->
+<div *ngIf="!programs">
+    <shared-table-skeleton></shared-table-skeleton>
+</div>
+
+<p-confirmDialog header="Delete" key="confirm1" icon="pi pi-exclamation-triangle"
+    message="Are you sure you want to proceed?" [style]="{width: '350px'}" acceptButtonStyleClass="p-button-text"
+    rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<p-dialog header="Start Program" [(visible)]="programActivationFormDisplay" [modal]="true" showEffect="fade"
+    [style]="{width: '500px'}" [breakpoints]="{'960px': '75vw'}">
+    <form [formGroup]="programActivationForm" (submit)="formSubmission(programActivationForm, 2)">
+        <div class="gird p-fluid mt-2">
+            <div class="mb-5 col-12">
+                <div class="p-float-label">
+                    <input id="numberOfAttendees" type="number" formControlName="numberOfAttendees" min="0" pInputText>
+                    <label for="numberOfAttendees">{{'Number of Attendees' | translate}}*</label>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <p-button label="{{'Start' | translate}}" type="submit" styleClass="p-button" [loading]="isSubmitting"
+                [disabled]="programActivationForm.invalid"></p-button>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="Publish Program" [(visible)]="programPublicationFormDisplay" [modal]="true" showEffect="fade"
+    [style]="{width: '500px'}" [breakpoints]="{'960px': '75vw'}">
+    <form [formGroup]="programPublicationForm" (submit)="formSubmission(programPublicationForm, 1)">
+        <div class="gird p-fluid mt-2">
+            <div class="mb-5 col-12">
+                <p-multiSelect display="chip" *ngIf="trainerNames" placeholder="Select Trainers" appendTo="body"
+                    formControlName="trainerID" [options]="trainerNames" [filter]="true" [showClear]="true"
+                    class="multiselect-custom">
+                    <ng-template let-trainer pTemplate="item">
+                        <div class="flex align-items-center">
+                            <span class="ml-2">{{trainer.label}}</span>
+                        </div>
+                    </ng-template>
+                </p-multiSelect>
+            </div>
+            <div class="mb-5 col-12">
+                <div class="p-float-label">
+                    <p-calendar id="dates" formControlName="programDates" [minDate]="today" dateFormat="MM dd, yy"
+                        selectionMode="range" appendTo="body"></p-calendar>
+                    <label for="dates">{{'Dates of Program' | translate}}*</label>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <p-button label="{{'Publish' | translate}}" type="submit" styleClass="p-button" [loading]="isSubmitting"
+                [disabled]="programPublicationForm.invalid"></p-button>
+        </div>
+    </form>
+</p-dialog>

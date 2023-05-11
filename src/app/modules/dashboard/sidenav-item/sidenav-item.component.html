@@ -1,0 +1,15 @@
+<ng-container>
+    <a *ngIf="(item.routerLink)" (click)="itemClick($event)" class="text-xl h-16 flex align-items-center gap-4 my-2"
+        [ngClass]="item.class" [routerLink]="item.routerLink" routerLinkActive="text-blue-900 bg-blue-100"
+        tabindex="0" pRipple>
+        <i [ngClass]="item.icon" class="layout-menuitem-icon" class="text-xl"></i>
+        <span class="layout-menuitem-text">{{item.label | translate}}</span>
+        <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
+    </a>
+
+    <ul *ngIf="item.items" [@children]="submenuAnimation">
+        <ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
+            <li dashboard-sidenav-item [item]="child" [index]="i" [parentKey]="key" [class]="child.badgeClass"></li>
+        </ng-template>
+    </ul>
+</ng-container>

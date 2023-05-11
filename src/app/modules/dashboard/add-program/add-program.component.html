@@ -1,0 +1,121 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+    <button pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined"
+        (click)="location.back()"></button>{{pageTitle}}
+</div>
+
+<div class="card" *ngIf="isLoading == false">
+
+    <div class="grid p-fluid">
+
+        <div class="col-12 mx-auto p-4">
+
+            <form [formGroup]="programForm" (submit)="programFormSubmission(programForm)">
+                <div class="mb-5 text-2xl">
+                    {{'Program Details' | translate}} 
+                </div>
+
+                <div>
+                    <div class="p-float-label my-2">
+                        <input id="name" type="text" formControlName="name" pInputText>
+                        <label for="name">{{'Name'| translate}}*</label>
+                    </div>
+                </div>
+
+                <div class="grid mt-5">
+                    <div class="col-12 grid mb-2 flex align-items-center gap-2 lg:mb-0">
+                        <div class="col-12 md:col-4">
+                            <div class="p-float-label my-2">
+                                <input placeholder="Duration" pInputText formControlName="programDuration" type="number"
+                                    id="programDuration" min="1" />
+                                <label for="programDuration">{{'Duration' | translate}}*</label>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-4">
+                            <p-selectButton [style]="{'width': '260px'}" formControlName="durationOption"
+                                [options]="durationOptions" optionLabel="{{'name' | translate}}" optionValue="value"></p-selectButton>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid" *ngIf="programDetails">
+                    <div class="col-12 text-2xl">
+                       {{'Current Skills' | translate}}
+                    </div>
+                    <div class="col-12 md:col-6 text-xl" *ngFor="let ms of settingsMetadata">
+                        <div class="card">
+                            <div class="mb-2">
+                                {{ms.mainSkillName}}
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <ng-container *ngFor="let ss of ms.subSkills">
+                                    <p-chip *ngIf="programDetails.skillsList?.includes(ss.subSkillName)"
+                                        [label]="ss.subSkillName" [removable]="false">
+                                    </p-chip>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid mt-2" *ngIf="isEditForm == false">
+                    <div class="col-12 text-2xl">
+                        Skills
+                    </div>
+                    <div class="col-12 md:col-4" *ngFor="let ms of settingsMetadata; let i = index">
+                        <span class="p-float-label">
+                            <p-multiSelect styleClass="p-float-label" [options]="ms.subSkills" appendTo="body"
+                                optionLabel="{{'subSkillName' | translate}}" display="chip" (onChange)="subSkillSelcted($event)"
+                                placeholder="" [filter]="true" class="multiselect-custom">
+                                <ng-template let-subskill let-i="rowIndex" pTemplate="item">
+                                    <div class="flex align-items-center">
+                                        <span class="ml-2">{{subskill.subSkillName}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                            <label for="p-float-label">{{ms.mainSkillName}}*</label>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid mt-5">
+                    <div class="col-12 text-2xl">
+                        {{'Other Details' | translate}}
+                    </div>
+                    <div class="col-12">
+                        <div class="p-float-label my-2">
+                            <input id="name" type="text" formControlName="programOverview" pInputText>
+                            <label for="name">{{'Program Overview' | translate}}*</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Section -->
+                <div class="col-12 flex align-items-center gap-2">
+                    <div class="my-2">{{'Program Image' | translate}}</div>
+                    <input type="file" name="profileImage" id="profileImage" (change)="onProgramPictureUpload($event)"
+                        accept=".png, .jpeg, .jpg, gif" #profileImage style="display: none;">
+
+                    <div *ngIf="profileImageLink == ''">
+                        <p-button label="{{'Upload' | translate}}" (onClick)="profileImage.click()" icon="pi pi-plus"
+                            [loading]="isProgramUploading"></p-button>
+                        <p-progressBar mode="determinate" [style]="{height: '6px'}" [showValue]="false"
+                            *ngIf="isProgramUploading == true" [value]="profileImageProgressStatus"></p-progressBar>
+                    </div>
+                    <div class="" *ngIf="profileImageLink != ''">
+                        <span class="p-input-icon-right ml-auto">
+                            <i class="pi pi-times cursor-pointer" (click)="removeProgramPicture()"></i>
+                            <input pInputText #searchInput type="text" [readOnly]="true" [value]="profileImageLink" />
+                        </span>
+                    </div>
+                </div>
+                <div class="flex justify-content-center">
+                    <p-button type="submit" pRipple label="{{'Submit' | translate}}" [disabled]="programForm.invalid"></p-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="card" *ngIf="isLoading == true">
+    <shared-form-skeleton></shared-form-skeleton>
+</div>

@@ -1,0 +1,206 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+    {{'Settings' | translate}}
+</div>
+
+<div *ngIf="isLoading == true">
+    <shared-accordion-skeleton></shared-accordion-skeleton>
+</div>
+
+<div *ngIf="isLoading == false">
+     <!-- if the length of provided data is 0 -->
+     <div *ngIf="noDataAvailable == true" class="text-2xl text-center">
+        {{'No Data Available' | translate}}
+    </div>
+
+    <div *ngIf="noDataAvailable == false" class="card">
+        <p-accordion>
+
+            <p-accordionTab header="{{'Edit Main Skill' | translate}}" [selected]="false" class="line-height-3 m-0">
+                <div class="card p-fluid flex flex-column">
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <p-chip *ngFor="let ms of settingsData.skillsList; let i = index"
+                            [removable]="false">
+                            <span class="cursor-pointer" (click)="valueUpdate({'label': ms.mainSkillName! , 'value': ms.mainSkillID!}, 5)">{{ms.mainSkillName}}</span>
+
+                        </p-chip>
+                    </div>
+                    <div class="grid p-fluid mt-4">
+                        <div class="col-12 md:col-8">
+                            <span class="p-float-label">
+                                <input pInputText id="mainSkill" #mainSkill [disabled]="isSubmitting" />
+                                <label for="mainSkill">{{'Main Skill' | translate}}*</label>
+                            </span>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <p-button label="Add" (onClick)="addToChips(mainSkill.value, 5)" [loading]="isSubmitting"
+                                [disabled]="mainSkill.value == ''"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{'Edit Sub Skills' | translate}}" [selected]="false" class="line-height-3 m-0">
+                <p-accordion [multiple]="true">
+
+                    <p-accordionTab *ngFor="let ms of settingsData.skillsList"
+                        header="Edit Sub-Skills of {{ms.mainSkillName}}" [selected]="false" class="line-height-3 m-0">
+                        <div class="p-fluid flex flex-column">
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <p-chip *ngFor="let ss of ms.subSkills">
+                                    <span class="cursor-pointer">{{ss.subSkillName}}</span>
+                                </p-chip>
+                            </div>
+                            <div class="grid p-fluid mt-4">
+                                <div class="col-12 md:col-8">
+                                    <span class="p-float-label">
+                                        <input pInputText id="subSkill" #subSkill [disabled]="isSubmitting" />
+                                        <label for="subSkill">{{'Sub Skill' | translate}}*</label>
+                                    </span>
+                                </div>
+                                <div class="col-12 md:col-3">
+                                    <p-button label="{{'Add' | translate}}" (onClick)="addToChips(subSkill.value, 6, ms.mainSkillID!)"
+                                        [loading]="isSubmitting" [disabled]="subSkill.value == ''"></p-button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </p-accordionTab>
+                </p-accordion>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{'Current Professional Details' | translate}}" [selected]="false" class="line-height-3 m-0">
+                <div class="card p-fluid flex flex-column">
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <p-chip *ngFor="let d of settingsData.signUpMetadata.currentProfessionalStatus; let i = index" [removable]="true" (onRemove)="removeChip(i, d.value, 0)">
+                            <span class="cursor-pointer" (click)="valueUpdate(d, 0)">{{d.label}}</span>
+                        </p-chip>
+                    </div>
+                    <div class="grid p-fluid mt-4">
+                        <div class="col-12 md:col-8">
+                            <span class="p-float-label">
+                                <input pInputText id="currentProfessionalStatus" #currentProfessioanlDetails
+                                    [disabled]="isSubmitting" />
+                                <label for="currentProfessionalStatus">{{'Current Professional Status' | translate}}*</label>
+                            </span>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <p-button label="Add" (onClick)="addToChips(currentProfessioanlDetails.value, 0)"
+                                [loading]="isSubmitting" [disabled]="currentProfessioanlDetails.value == ''"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{'Industry Type' | translate}}" [selected]="false" class="line-height-3 m-0">
+                <div class="card p-fluid flex flex-column">
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <p-chip *ngFor="let d of settingsData.signUpMetadata.industryType; let i = index" [removable]="true" (onRemove)="removeChip(i, d.value, 1)">
+                            <span class="cursor-pointer" (click)="valueUpdate(d, 1)">{{d.label}}</span>
+                        </p-chip>
+                    </div>
+                    <div class="grid p-fluid mt-4">
+                        <div class="col-12 md:col-8">
+                            <span class="p-float-label">
+                                <input pInputText id="industryType" #industryType [disabled]="isSubmitting" />
+                                <label for="industryType">{{'Industry Type' | translate}}*</label>
+                            </span>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <p-button label="Add" (onClick)="addToChips(industryType.value, 1)" [loading]="isSubmitting"
+                                [disabled]="industryType.value == ''"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{'Experience in IT' | translate}}" [selected]="false" class="line-height-3 m-0">
+                <div class="card p-fluid flex flex-column">
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <p-chip *ngFor="let d of settingsData.signUpMetadata.experienceInIT; let i = index" [removable]="true" (onRemove)="removeChip(i, d.value, 2)">
+                            <span class="cursor-pointer" (click)="valueUpdate(d, 2)">{{d.label}}</span>
+                        </p-chip>
+                    </div>
+                    <div class="grid p-fluid mt-4">
+                        <div class="col-12 md:col-8">
+                            <span class="p-float-label">
+                                <input pInputText id="experienceInIT" #experienceInIT [disabled]="isSubmitting" />
+                                <label for="experienceInIT">{{'Experience in IT' | translate}}*</label>
+                            </span>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <p-button label="{{'Add' | translate}}" (onClick)="addToChips(experienceInIT.value, 2)"
+                                [loading]="isSubmitting" [disabled]="experienceInIT.value == ''"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{'Field Specialization' | translate}}" [selected]="false" class="line-height-3 m-0">
+                <div class="card p-fluid flex flex-column">
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <p-chip *ngFor="let d of settingsData.signUpMetadata.fieldSpecialization; let i = index" [removable]="true" (onRemove)="removeChip(i, d.value, 3)">
+                            <span class="cursor-pointer" (click)="valueUpdate(d, 3)">{{d.label}}</span>
+                        </p-chip>
+                    </div>
+                    <div class="grid p-fluid mt-4">
+                        <div class="col-12 md:col-8">
+                            <span class="p-float-label">
+                                <input pInputText id="fieldSpecialization" #fieldSpecialization
+                                    [disabled]="isSubmitting" />
+                                <label for="fieldSpecialization">{{'Field Specialization' | translate}}*</label>
+                            </span>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <p-button label="Add" (onClick)="addToChips(fieldSpecialization.value, 3)"
+                                [loading]="isSubmitting" [disabled]="fieldSpecialization.value == ''"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{'Skills' | translate}}" [selected]="false" class="line-height-3 m-0">
+                <div class="card p-fluid flex flex-column">
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <p-chip *ngFor="let d of settingsData.signUpMetadata.skills; let i = index"
+                            [removable]="true" (onRemove)="removeChip(i, d.value, 4)">
+                            <span class="cursor-pointer" (click)="valueUpdate(d, 4)">{{d.label}}</span>
+                        </p-chip>
+                    </div>
+                    <div class="grid p-fluid mt-4">
+                        <div class="col-12 md:col-8">
+                            <span class="p-float-label">
+                                <input pInputText id="skills" #skills [disabled]="isSubmitting" />
+                                <label for="skills">{{'Skills' | translate}}*</label>
+                            </span>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <p-button label="Add" (onClick)="addToChips(skills.value, 4)" [loading]="isSubmitting"
+                                [disabled]="skills.value == ''"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+
+        </p-accordion>
+    </div>
+
+    <p-dialog header="{{'Update' | translate}}" *ngIf="updateForm" [(visible)]="displayUpdateDialog" [modal]="true" showEffect="fade"
+        [style]="{width: '500px'}" [breakpoints]="{'960px': '75vw'}">
+        <form [formGroup]="updateForm" (submit)="updateFormSubmission(updateForm)">
+            <div class="field">
+                <div class="gird p-fluid mt-2">
+                    <div class="mb-2 col-12">
+                        <div class="p-float-label">
+                            <input id="name" type="text" formControlName="name" pInputText>
+                            <label for="name">{{'Update Value' | translate}}*</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <p-button type="submit" [loading]="isSubmitting" [disabled]="updateForm.invalid || isSubmitting == true" label="Update">
+                </p-button>
+            </div>
+        </form>
+    </p-dialog>
+</div>

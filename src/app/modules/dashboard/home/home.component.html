@@ -1,0 +1,169 @@
+<!-- Skeleton -->
+<div class="grid" *ngIf="isLoading == true">
+    <div class="col-12 lg:col-6 xl:col-4" *ngFor="let x of [].constructor(3); let i = index">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <p-skeleton width="5rem" height=".5rem" styleClass="mb-4"></p-skeleton>
+                    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+                    <div></div>
+                </div>
+                <div class="flex align-items-center justify-content-center">
+                    <p-skeleton size="4rem"></p-skeleton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 xl:col-6" *ngFor="let x of [].constructor(2); let i = index">
+        <div class="card">
+            <p-skeleton *ngIf="i == 0" width="15rem" styleClass="mb-4"></p-skeleton>
+            <p-skeleton *ngIf="i == 0" height="28rem"></p-skeleton>
+
+            <p-skeleton *ngIf="i == 1" width="15rem" styleClass="mb-4"></p-skeleton>
+            <div *ngIf="i == 1" class="ml-7">
+                <div class="ml-8"><p-skeleton shape="circle" size="28rem"></p-skeleton></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Skeleton Ends -->
+
+<!-- Admin's Dashboard  -->
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold" *ngIf="userType == 'Admin'">
+    {{'Admin Dashboard' | translate}}
+</div>
+
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold" *ngIf="userType == 'Trainer'">
+    {{'Trainer Dashboard' | translate}}
+</div>
+
+
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold" *ngIf="userType == 'Talent'">
+    {{'Talent Dashboard' | translate}}
+</div>
+
+
+<div class="grid" *ngIf="isLoading == false">
+    <div *ngIf="!homeData" class="text-2xl text-center">
+        {{'No Data Available 2' | translate}}
+    </div>
+    <ng-container *ngIf="homeData">
+        <div class="col-12 md:col-4" *ngFor="let x of [].constructor(3); let i = index">
+            <div class="card mb-0"
+                [ngStyle]="{'border-color': (i==0)? 'rgb(0,0,255, 0.3)' : (i==1) ?  'rgb(255,165,0, 0.4)' : (i==2)? 'rgb(0, 100, 100, 0.3)' : 'rgb(0,0,255, 0.3)'}">
+                <div class="flex justify-content-between mb-3">
+                    <div>
+                        <div *ngIf="userType=='Admin'">
+                            <span *ngIf="i == 0" class="block text-500 font-medium mb-3">{{'Programs' | translate}}</span>
+                            <span *ngIf="i == 1" class="block text-500 font-medium mb-3">{{'Talents' | translate}}</span>
+                            <span *ngIf="i == 2" class="block text-500 font-medium mb-3">{{'Trainers' | translate}}</span>
+                        </div>
+                        <div *ngIf="userType=='Trainer'">
+                            <span *ngIf="i == 0" class="block text-500 font-medium mb-3">{{'My Programs' | translate}}</span>
+                            <span *ngIf="i == 1" class="block text-500 font-medium mb-3">{{'Talents' | translate}}</span>
+                            <span *ngIf="i == 2" class="block text-500 font-medium mb-3">{{'Evaluation Pending' | translate}}</span>
+                        </div>
+                        <div *ngIf="userType=='Talent'">
+                            <span *ngIf="i == 0" class="block text-500 font-medium mb-3">{{'My Programs' | translate}}</span>
+                            <span *ngIf="i == 1" class="block text-500 font-medium mb-3">{{"Certificates Earned" | translate}}</span>
+                            <span *ngIf="i == 2" class="block text-500 font-medium mb-3">{{'Total Scoring' | translate}}</span>
+                        </div>
+                        <div *ngIf="userType == 'Admin'" class="text-900 font-medium" style="font-size: 2.5rem">
+                            <span *ngIf="i == 0">{{ homeData.summaryCards?.programs ?? '-'}}</span>
+                            <span *ngIf="i == 1">{{ homeData.summaryCards?.talents ?? '-'}}</span>
+                            <span *ngIf="i == 2">{{ homeData.summaryCards?.trainers ?? '-'}}</span>
+                        </div>
+                        <div *ngIf="userType == 'Trainer'" class="text-900 font-medium" style="font-size: 2.5rem">
+                            <span *ngIf="i == 0">{{ homeData.summaryCards?.programs ?? '-' }}</span>
+                            <span *ngIf="i == 1">{{ homeData.summaryCards?.talents ?? '-'}}</span>
+                            <span *ngIf="i == 2">{{ homeData.summaryCards?.evaluationPending ?? '-'}}</span>
+                        </div>
+                        <div *ngIf="userType == 'Talent'" class="text-900 font-medium" style="font-size: 2.5rem">
+                            <span *ngIf="i == 0">{{ homeData.summaryCards?.programs ?? '-'}}</span>
+                            <span *ngIf="i == 1">{{ homeData.summaryCards?.certificates ?? '-'}}</span>
+                            <span *ngIf="i == 2">{{ homeData.summaryCards?.position +  ' %'}}</span>
+                        </div>
+                    </div>
+                    <div *ngIf="i == 0" class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                        [ngStyle]="{ width: '4rem', height: '4rem' }">
+                        <i class="pi pi-book text-blue-500" style="font-size: 3rem"></i>
+                    </div>
+                    <div *ngIf="i == 1"
+                        class="flex align-items-center justify-content-center bg-orange-100 border-round"
+                        [ngStyle]="{ width: '4rem', height: '4rem' }">
+                        <i *ngIf="userType =='Admin'" class="pi pi-users text-orange-500" style="font-size: 3rem"></i>
+                        <i *ngIf="userType =='Trainer'" class="pi pi-user-edit text-orange-500"
+                            style="font-size: 3rem"></i>
+                        <i *ngIf="userType =='Talent'" class="pi pi-id-card text-orange-500"
+                            style="font-size: 3rem"></i>
+                    </div>
+                    <div *ngIf="i == 2" class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                        [ngStyle]="{ width: '4rem', height: '4rem' }">
+                        <i *ngIf="userType =='Admin'" class="pi pi-user-edit text-cyan-500" style="font-size: 3rem"></i>
+                        <i *ngIf="userType =='Trainer'" class="pi pi-hourglass text-cyan-500"
+                            style="font-size: 3rem"></i>
+                        <i *ngIf="userType =='Talent'" class="pi pi-star-fill text-cyan-500"
+                            style="font-size: 3rem"></i>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- Charts for admin -->
+    <div class="col-12 md:col-6" *ngIf="userType == 'Admin'">
+        <div class="card">
+
+            <h5>
+                <span *ngIf="userType == 'Admin'">{{'Enrolled v/s Attendees' | translate}}</span>
+            </h5>
+
+            <div *ngIf="(adminBarChart.labels.length == 0 || adminBarChart.labels  == null) && userType == 'Admin'" class="text-2xl text-center">
+                {{'No Data Available' | translate}}
+            </div>
+            <p-chart *ngIf="adminBarChart.labels.length !== 0" style="max-height: 450px;" type="bar"
+                [data]="adminBarChart" [options]="barOptions" height="450px"></p-chart>
+        </div>
+    </div>
+    <div class="col-12 md:col-6" *ngIf="userType == 'Admin'">
+        <div class="card">
+            <h5>
+                <span>{{'My Programs' | translate}}</span>
+            </h5>
+            <div *ngIf="(pieChart.labels.length == 0 || pieChart.labels == null) && userType == 'Admin'" class="text-2xl text-center">
+                {{'No Data Available' | translate}}
+            </div>
+            <p-chart type="pie" [data]="pieChart" [options]="pieOptions" height="450px"></p-chart>
+        </div>
+    </div>
+
+    <!-- Charts for Trainer and Talent -->
+    <ng-container *ngIf="userType !== 'Admin'">
+        <div class="col-12 md:col-6" *ngFor="let x of [].constructor(2); let i = index">
+            <div class="card" style="max-height: 550px;" *ngIf="userType !== 'Admin'">
+                <h5 *ngIf="i == 0">
+                    <span *ngIf="userType == 'Trainer'">{{'Program Attendees' | translate}}</span>
+                    <span *ngIf="userType == 'Talent'">{{'Grades Overview' | translate}}</span>
+                </h5>
+                <div *ngIf="userType !== 'Admin'">
+                    <div *ngIf="barChart.labels.length == 0" class="text-2xl text-center">
+                        {{'No Data Available' | translate}}
+                    </div>
+                    <p-chart *ngIf="i == 0 && barChart.labels.length > 0" type="bar"
+                        [data]="barChart" [options]="barOptions" height="450px"></p-chart>
+                </div>
+    
+                <h5 *ngIf="i == 1">
+                    <span>{{'My Programs' | translate}} {{'(Active, Completed, Upcoming)' | translate}}</span>
+                </h5>
+                <div *ngIf="pieChart.labels.length == 0" class="text-2xl text-center">
+                    {{'No Data Available' | translate}}
+                </div>
+                <p-chart *ngIf="i == 1 && pieChart.labels.length > 0" type="pie" [data]="pieChart" [options]="pieOptions"
+                    height="450px"></p-chart>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

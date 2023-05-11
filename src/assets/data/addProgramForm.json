@@ -1,0 +1,74 @@
+[
+    {
+        "mainSkillName": "m1",
+        "mainSkillID": 1,
+        "subSkills": [
+            {
+                "subSkillID": 1,
+                "subSkillName": "s1"
+            },
+            {
+                "subSkillID": 2,
+                "subSkillName": "s1"
+            },
+            {
+                "subSkillID": 3,
+                "subSkillName": "s1"
+            }
+        ]
+    },
+    {
+        "mainSkillName": "m2",
+        "mainSkillID": 2,
+        "subSkills": [
+            {
+                "subSkillID": 4,
+                "subSkillName": "s1"
+            },
+            {
+                "subSkillID": 5,
+                "subSkillName": "s1"
+            },
+            {
+                "subSkillID": 6,
+                "subSkillName": "s1"
+            }
+        ]
+    },
+    {
+        "mainSkillName": "m3",
+        "mainSkillID": 3,
+        "subSkills": [
+            {
+                "subSkillID": 7,
+                "subSkillName": "s7"
+            },
+            {
+                "subSkillID": 8,
+                "subSkillName": "s8"
+            },
+            {
+                "subSkillID": 9,
+                "subSkillName": "s9"
+            }
+        ]
+    },
+    {
+        "mainSkillName": "m4",
+        "mainSkillID": 4,
+        "subSkills": [
+            {
+                "subSkillID": 10,
+                "subSkillName": "m4"
+            },
+            {
+                "subSkillID": 11,
+                "subSkillName": "m4"
+            },
+            {
+                "subSkillID": 12,
+                "subSkillName": "m4"
+            }
+        ]
+    }
+]

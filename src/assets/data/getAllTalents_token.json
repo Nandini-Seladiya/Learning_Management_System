@@ -1,0 +1,232 @@
+[
+    {
+        "personalDetails": {
+            "name": "himanshu",
+            "gender": "male",
+            "countryName": "India"
+        },
+        "otherDetails": {
+            "profileImage": ""
+        },
+        "credentials": {
+            "email": "yegfyegfygefg@asite.com",
+            "id": 1
+        },
+        "enrolledPrograms": [
+            {
+                "id": 1,
+                "name": "Program Name 1",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": false,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": "A"
+                }
+            },
+            {
+                "id": 2,
+                "name": "Program Name 2",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": true,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": "A+"
+                }
+            },
+            {
+                "id": 3,
+                "name": "Program Name 3",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": true,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": "B+"
+                }
+            }
+        ]
+    },
+    {
+        "personalDetails": {
+            "name": "himanshu 2",
+            "gender": "male",
+            "countryName": "India"
+        },
+        "otherDetails": {
+            "profileImage": ""
+        },
+        "credentials": {
+            "email": "asdf@asite.com",
+            "id": 2
+        },
+        "enrolledPrograms": [
+            {
+                "id": 5,
+                "name": "Program Name 5",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": false,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": ""
+                }
+            },
+            {
+                "id": 2,
+                "name": "Program Name 2",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": true,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": "C"
+                }
+            }
+        ]
+    },
+    {
+        "personalDetails": {
+            "name": "himanshu 3",
+            "gender": "male",
+            "countryName": "India"
+        },
+        "otherDetails": {
+            "profileImage": ""
+        },
+        "credentials": {
+            "email": "yegfyegfygefg@asite.com",
+            "id": 3
+        },
+        "enrolledPrograms": [
+            {
+                "id": 5,
+                "name": "Program Name 5",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": false,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": ""
+                }
+            }
+        ]
+    },
+    {
+        "personalDetails": {
+            "name": "himanshu 4",
+            "gender": "male",
+            "countryName": "India"
+        },
+        "otherDetails": {
+            "profileImage": ""
+        },
+        "credentials": {
+            "email": "yegfyegfygefg@asite.com",
+            "id": 4
+        },
+        "enrolledPrograms": [
+            {
+                "id": 3,
+                "name": "Program Name 3",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": true,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": "B+"
+                }
+            }
+        ]
+    },
+    {
+        "personalDetails": {
+            "name": "himanshu 5",
+            "gender": "male",
+            "countryName": "India"
+        },
+        "otherDetails": {
+            "profileImage": ""
+        },
+        "credentials": {
+            "email": "yegfyegfygefg@asite.com",
+            "id": 5
+        },
+        "enrolledPrograms": [
+            {
+                "id": 1,
+                "name": "Program Name 1",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": false,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": ""
+                }
+            },
+            {
+                "id": 2,
+                "name": "Program Name 2",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": true,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": "A+"
+                }
+            },
+            {
+                "id": 3,
+                "name": "Program Name 3",
+                "thumbnailImageURL": "",
+                "programTracking": {
+                    "isPublished": true,
+                    "isStarted": true,
+                    "isEnded": true,
+                    "startDate": "",
+                    "endDate": ""
+                },
+                "grades": {
+                    "overallGrades": "B+"
+                }
+            }
+        ]
+    }
+]

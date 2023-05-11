@@ -1,0 +1,120 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+    <button pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined"
+        (click)="location.back()"></button>{{pageTitle}}
+</div>
+<div class="card" *ngIf="isLoading == false">
+
+    <div class="grid p-fluid">
+
+        <div class="col-12 mx-auto p-4">
+
+            <form [formGroup]="addTrainerForm" (ngSubmit)="addTrainer(addTrainerForm)">
+                <div class="mb-5 text-2xl">
+                    {{'Trainer Details' | translate}}
+                </div>
+
+                <div class="grid">
+                    <div class="col-12 mt-5">
+                        <div class="p-float-label my-2">
+                            <input id="name" type="text" formControlName="name" pInputText>
+                            <label for="name">{{'Name' | translate}}*</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid" *ngIf="isEditForm == false">
+                    <div class="col-12 my-5">
+                        <div class="p-float-label my-2">
+                            <input id="email" type="email" formControlName="email" pInputText>
+                            <label for="email">{{'Email' | translate}}*</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid my-4">
+                    <div class="col-12 md:col-6">
+                        <div class="p-float-label">
+                            <input id="age" type="number" formControlName="age" min="14" max="60" pInputText>
+                            <label for="age">{{'Age' | translate}}*</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 md:col-6">
+                        <div class="p-float-label">
+                            <input pInputText type="number" min="0" id="yearOfExperience"
+                                formControlName="yearOfExperience" />
+                            <label for="yearOfExperience">{{'Years Of Experience' | translate}}*</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid my-4">
+                    <div class="col-12 md:col-6">
+                        <div class="p-float-label my-2">
+                            <input id="recordedVideoLink" type="text" formControlName="linkedInProfileLink" pInputText>
+                            <label for="recordedVideoLink">{{'LinkedIn Profile Link' | translate}}*</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 md:col-6">
+                        <div class="p-float-label my-2">
+                            <input id="recordedVideoLink" type="text" formControlName="recordedVideoLink" pInputText>
+                            <label for="recordedVideoLink">{{'Recorded Video Link' | translate}}*</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="col-12 md:col-4">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="countries" placeholder="Country" formControlName="countryName"
+                                [filter]="false"></p-dropdown>
+                            <label for="p-float-label">{{'Country' | translate}}*</label>
+                        </span>
+                    </div>
+
+                    <div class="col-12 mb-2 md:col-4">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="gender" placeholder="Gender"
+                                formControlName="gender" [filter]="false"></p-dropdown>
+                            <label for="p-float-label">{{'Gender' | translate}}*</label>
+                        </span>
+                    </div>
+
+                    <!-- Upload Section -->
+                    <div class="col-12 md:col-4 flex align-items-center gap-2">
+                        <div class="my-2">{{'Profile Image' | translate}}</div>
+                        <input type="file" name="profileImage" id="profileImage"
+                            (change)="onProfilePictureUpload($event)" accept=".png, .jpeg, .jpg, gif" #profileImage
+                            style="display: none;">
+
+                        <div *ngIf="profileImageLink == '' || profileImageLink == null">
+                            <p-button label="{{'Upload' | translate}}" (onClick)="profileImage.click()" icon="pi pi-plus"
+                                [loading]="isProfileUploading"></p-button>
+                            <p-progressBar mode="determinate" [style]="{height: '6px'}" [showValue]="false"
+                                *ngIf="isProfileUploading == true" [value]="profileImageProgressStatus"></p-progressBar>
+                        </div>
+                        <div class="" *ngIf="profileImageLink != '' && profileImageLink != null">
+                            <span class="p-input-icon-right ml-auto">
+                                <i class="pi pi-times cursor-pointer" (click)="removeProfilePicture()"></i>
+                                <input pInputText #searchInput type="text" [readOnly]="true"
+                                    [value]="profileImageLink" />
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex justify-content-center my-3">
+                    <p-button type="submit" pRipple label="{{'Submit' | translate}}" [disabled]="addTrainerForm.invalid"
+                        [loading]="isSubmitting"></p-button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="card" *ngIf="isLoading == true">
+    <shared-form-skeleton></shared-form-skeleton>
+</div>

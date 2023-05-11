@@ -1,0 +1,113 @@
+[
+    {
+        "personalDetails": {
+            "name": "st 1",
+            "id": 1
+        },
+        "otherDetails": {
+            "profileImage": "www.abc.com"
+        },
+        "credentials": {
+            "email": "abc@gmail.com",
+            "id": 1
+        },
+        "enrolledPrograms": [
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "programTracking": {
+                    "isEnded": true
+                }
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": false
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": true
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": false
+            }
+        ]
+    },
+    {
+        "personalDetails": {
+            "name": "st 1",
+            "id": 1
+        },
+        "otherDetails": {
+            "profileImage": "www.abc.com"
+        },
+        "credentials": {
+            "email": "abc@gmail.com",
+            "id": 1
+        },
+        "enrolledPrograms": [
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "programTracking": {
+                    "isEnded": true
+                }
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": false
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": true
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": false
+            }
+        ]
+    },
+    {
+        "personalDetails": {
+            "name": "st 1",
+            "id": 1
+        },
+        "otherDetails": {
+            "profileImage": "www.abc.com"
+        },
+        "credentials": {
+            "email": "abc@gmail.com",
+            "id": 1
+        },
+        "enrolledPrograms": [
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "programTracking": {
+                    "isEnded": true
+                }
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": false
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": true
+            },
+            {
+                "name": "program 1",
+                "overallGrades": "A+",
+                "isEnded": false
+            }
+        ]
+    }
+]

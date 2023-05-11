@@ -1,0 +1,279 @@
+.lhs-front-content {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  row-gap: 1em;
+  position: relative;
+}
+
+p{
+  font-size: 1.2rem;
+}
+
+.rhs-front-content {
+  width: 70%;
+  display: flex;
+  height: -moz-fit-content;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  grid-template-columns: 1fr;
+}
+
+.details-row {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.details-row label {
+  font-weight: 600;
+}
+
+.main-container {
+  padding: 2em;
+  border: 1px solid lightgray;
+}
+
+.avatar-preview {
+  width: 130px;
+  height: 130px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #F8F8F8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-preview>img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.details-container {
+  display: flex;
+  column-gap: 2em;
+  height: fit-content;
+}
+
+.cover-page img {
+  width: 100%;
+  height: 200px;
+  border-radius: 70px 0 0 0;
+}
+
+.trainer-data {
+  // width: 70%;
+  width: 100%;
+}
+
+.trainer-data h1 {
+  font-size: 40px;
+}
+
+.trainer-data h4 {
+  font-size: 1.2em;
+  // color: gray;
+}
+
+.editBtn {
+  margin: 2em;
+}
+
+.row-data {
+  display: flex;
+  align-items: center;
+}
+
+.row-data img {
+  width: 20px;
+  margin-right: 1em;
+}
+
+.flex-div {
+  // display: flex;
+  // width: 60%;
+  // justify-content: space-between;
+  // margin: 2em 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin: 3em 0;
+}
+
+.link-flex-div {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.row-data-flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 1em;
+  align-items: center;
+}
+
+.row-data-flex span {
+  // font-size: 20px;
+  // font-weight: bold;
+}
+
+.title-flex-div {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  column-gap: 0.5em;
+  // margin-bottom:1em;
+}
+
+.title-flex-div h4 {
+  font-weight: bold;
+}
+
+h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+h3 {
+  margin: 0;
+}
+
+.row1{
+  text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    row-gap: 1em;
+    padding: 1em;
+}
+.grid-div{
+  width: 100%;
+  height: 100%;
+  justify-content: space-evenly;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1px 1fr;
+  justify-items: center;
+  align-content: stretch;
+}
+.grid-div p{
+  font-weight: bold;
+}
+.grid-div span{
+  font-weight:normal;
+}
+.grid-div i{
+  color: var(--primary-color);
+}
+.main-details-row{
+  display: flex;
+    align-items: center;
+    column-gap: 1em;
+}
+
+@media (max-width:1264px) and (min-width:992px) {
+  .avatar-preview {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    border-radius: 100%;
+    border: 6px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 760px) {
+  .details-container {
+    display: flex;
+    column-gap: 1em;
+    flex-direction: column;
+    row-gap: 2em;
+  }
+
+  .lhs-front-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 0.5em;
+    position: relative;
+  }
+
+  #contentDivider {
+    display: none;
+  }
+
+  .rhs-front-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* text-align: center; */
+  }
+
+  .trainer-data {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .row-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-div {
+    // display: flex;
+    // width: 100%;
+    // justify-content: center;
+    // margin: 2em 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 2em 0;
+    flex-direction: column;
+    row-gap: 2em;
+  }
+
+  .flex-div p-divider {
+    display: none;
+  }
+
+  .rhs-front-content p-button {
+    margin: 2em;
+    align-self: center;
+  }
+
+  .trainer-name-skeleton {
+    text-align: -webkit-center;
+  }
+
+  .editBtn {
+    align-self: center;
+  }
+}
+
+@media (max-width:570px){
+  .grid-div{
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1em;
+  }
+  .grid-div p-divider{
+    display: none;
+  }
+  .col2 div{
+    // margin-bottom: 1em;
+  }
+}

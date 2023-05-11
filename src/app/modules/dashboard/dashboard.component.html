@@ -1,0 +1,14 @@
+<div class="layout-wrapper" [ngClass]="containerClass">
+    <dashboard-header [currentLanguage]="currentLanguage" (languageValue)="switchLang($event)"></dashboard-header>
+    <div class="layout-sidebar">
+        <dashboard-sidenav></dashboard-sidenav>
+    </div>
+    <div class="layout-main-container">
+        <p-breadcrumb class="max-w-full mt-2 mb-4" [model]="items" [style]="{'background-color': 'transparent', 'padding':'0px', 'border':'none'}"></p-breadcrumb>
+        <div class="layout-main">
+            <router-outlet></router-outlet>
+        </div>
+        <app-footer></app-footer>
+    </div>
+    <div class="layout-mask"></div>
+</div>

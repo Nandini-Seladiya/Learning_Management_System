@@ -1,0 +1,30 @@
+.talent-profile-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.talent-details-right{
+    width: 50%;
+    margin: 2rem;
+
+    // margin-left: -20px;
+}
+.talent-details-left{
+    width: 40%;
+}
+@media (max-width: 780px) {
+    .talent-profile-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    .talent-details-right{
+        width: 100%;
+        margin: 0px;
+    }
+    .talent-details-left{
+        width: 100%;
+    }
+}
+.card1{
+    min-width: 200px;
+}

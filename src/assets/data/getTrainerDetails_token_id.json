@@ -1,0 +1,43 @@
+{
+    "name": "Trainer 1",
+    "id": 1,
+    "programs": [
+        {
+            "id": 1,
+            "name": "Program Name 1",
+            "thumbnailImageURL": "www.abc.com",
+            "programTracking": {
+                "isPublished": true,
+                "isStarted": true,
+                "isEnded": false,
+                "startDate": "",
+                "endDate": ""
+            }
+        },
+        {
+            "id": 2,
+            "name": "Program Name 2",
+            "thumbnailImageURL": "www.abc.com",
+            "programTracking": {
+                "isPublished": true,
+                "isStarted": true,
+                "isEnded": true,
+                "startDate": "",
+                "endDate": ""
+            }
+        }
+    ],
+    "yearOfExperience": 5,
+    "linkedInProfileLink":"www.abc.com",
+    "recordedVideoLink":"www.acgsd.com",
+    "email": "assdf",
+    "age": 12,
+    "profileImage": "string url",
+    "assignedRole": [
+        {
+            "name": "Sub admin",
+            "id": 1,
+            "privilages": [1,2,3,4,5,6,7,8]
+        }
+    ]
+}

@@ -1,0 +1,158 @@
+{
+    "skillsList": [
+        {
+            "mainSkillName": "m1",
+            "mainSkillID": 1,
+            "subSkills": [
+                {
+                    "subSkillID": 1,
+                    "subSkillName": "s1"
+                },
+                {
+                    "subSkillID": 2,
+                    "subSkillName": "s2"
+                },
+                {
+                    "subSkillID": 3,
+                    "subSkillName": "s1"
+                }
+            ]
+        },
+        {
+            "mainSkillName": "m2",
+            "mainSkillID": 2,
+            "subSkills": [
+                {
+                    "subSkillID": 4,
+                    "subSkillName": "s1"
+                },
+                {
+                    "subSkillID": 5,
+                    "subSkillName": "s1"
+                },
+                {
+                    "subSkillID": 6,
+                    "subSkillName": "s1"
+                }
+            ]
+        },
+        {
+            "mainSkillName": "m3",
+            "mainSkillID": 3,
+            "subSkills": [
+                {
+                    "subSkillID": 7,
+                    "subSkillName": "s1"
+                },
+                {
+                    "subSkillID": 8,
+                    "subSkillName": "s1"
+                },
+                {
+                    "subSkillID": 9,
+                    "subSkillName": "s1osudhfoasdf"
+                }
+            ]
+        }
+    ],
+    "signUpMetadata": {
+        "currentProfessionalStatus": [
+            {
+                "value": 1,
+                "label": "Working"
+            },
+            {
+                "value": 2,
+                "label": "On a break"
+            },
+            {
+                "value": 3,
+                "label": "Studying"
+            }
+        ],
+        "industryType": [
+            {
+                "value": 1,
+                "label": "Financial"
+            },
+            {
+                "value": 2,
+                "label": "IT"
+            },
+            {
+                "value": 3,
+                "label": "Education"
+            },
+            {
+                "value": 4,
+                "label": "Manufacturing"
+            },
+            {
+                "value": 5,
+                "label": "Other"
+            }
+        ],
+        "experienceInIT": [
+            {
+                "value": 1,
+                "label": "No experience"
+            },
+            {
+                "value": 2,
+                "label": "Basic Coding"
+            },
+            {
+                "value": 3,
+                "label": "Moderate Coding"
+            },
+            {
+                "value": 4,
+                "label": "Expert Coding"
+            },
+            {
+                "value": 5,
+                "label": "Leadership"
+            }
+        ],
+        "fieldSpecialization": [
+            {
+                "value": 1,
+                "label": "Technologist"
+            },
+            {
+                "value": 2,
+                "label": "Business Analyst"
+            },
+            {
+                "value": 3,
+                "label": "Quality Assurance"
+            },
+            {
+                "value": 4,
+                "label": "UI/UX"
+            },
+            {
+                "value": 5,
+                "label": "Support"
+            }
+        ],
+        "skills": [
+            {
+                "value": 1,
+                "label": "Angular"
+            },
+            {
+                "value": 2,
+                "label": "Nodejs"
+            },
+            {
+                "value": 3,
+                "label": "Java"
+            },
+            {
+                "value": 4,
+                "label": "Spring Boot"
+            }
+        ]
+    }
+}

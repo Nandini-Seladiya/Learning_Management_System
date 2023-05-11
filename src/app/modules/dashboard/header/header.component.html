@@ -1,0 +1,54 @@
+<div class="layout-topbar">
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="appUI.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <a class="layout-topbar-logo" routerLink="/">
+        <span>LMS</span>
+    </a>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button"
+        (click)="appUI.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu"
+        [ngClass]="{'layout-topbar-menu-mobile-active': appUI.state.profileSidebarVisible}">
+
+        <div class="mx-2">
+            <p-dropdown [options]="langs" [(ngModel)]="currentLanguage" (onChange)="changeLanguage($event.value)"
+            [filter]="false"></p-dropdown>    
+        </div>
+
+        <div class="p-link flex align-items-center gap-2"
+            [ngClass]="{'layout-topbar-button': appUI.state.profileSidebarVisible}">
+            {{'Theme' | translate}}:
+            <div class="flex align-items-center mx-z">
+                <input type="checkbox" class="checkbox" id="themeCheckBox" (change)="changeTheme($event)">
+                <label for="themeCheckBox" class="checkbox-label">
+                    <i class="pi pi-sun"></i>
+                    <i class="pi pi-moon"></i>
+                    <span class="ball"></span>
+                </label>
+            </div>
+        </div>
+
+        <button *ngIf="appUI.state.profileSidebarVisible == false" class="p-link layout-topbar-button"
+            (click)="profileMenu.toggle($event)">
+            <i class="pi pi-user"></i>
+            <span>{{'Profile' | translate}}</span>
+        </button>
+
+        <button *ngIf="appUI.state.profileSidebarVisible == true && userType !== 'Admin'"
+            class="p-link layout-topbar-button" routerLink="../profile">
+            <i class="pi pi-user"></i>
+            <span>{{'Profile' | translate}}</span>
+        </button>
+        <button *ngIf="appUI.state.profileSidebarVisible == true" class="p-link layout-topbar-button"
+            (click)="userLogout()">
+            <i class="pi pi-sign-out"></i>
+            <span>{{'Log Out' | translate}}</span>
+        </button>
+        <p-menu #profileMenu appendTo="body" [popup]="true" [model]="menuItems"></p-menu>
+    </div>
+</div>

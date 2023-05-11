@@ -1,0 +1,1 @@
+export const UNIVERSITIES = ['GTU', 'NIRMA', 'PDPU', 'DAIICT', 'IIT', 'NIT', 'MARWADI', 'DARSHAN', 'OTHER']

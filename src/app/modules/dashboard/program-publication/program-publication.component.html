@@ -1,0 +1,7 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+    {{'Program Publication' | translate}}
+</div>
+<p-tabMenu styleClass="mb-5" [model]="mainTabs" [activeItem]="mainTabs[mainActiveTab]"
+    (activeItemChange)="mainTabChange($event)"></p-tabMenu>
+    <dashboard-program-table *ngIf="isLoading == true"></dashboard-program-table>
+    <dashboard-program-table *ngIf="isLoading == false" [trainerNames]="trainerNames" [programs]="programs" [masterTab]="masterTab"></dashboard-program-table>

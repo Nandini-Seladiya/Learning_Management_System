@@ -1,0 +1,28 @@
+<div class="flex gap-3 align-items-center text-5xl mb-4 font-bold">
+    <button pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined" (click)="location.back()"></button>{{'My Grades' | translate}}
+</div>
+
+<div *ngIf="isLoading == false">
+    <div class="main">
+        <div class="card card1" *ngFor="let data of myPrograms; let i=index">
+            <div class="title">
+                <h1>{{data.mainSkillName}}</h1>
+                <p-knob [(ngModel)]="avg[i]"  [step]="10" [min]="0" [max]="100" [strokeWidth]="9"
+                    [readonly]="true" [size]="170" valueColor="#6366F1" [valueTemplate]="avgGrade[i]"></p-knob>
+            </div>
+            <hr />
+            <div class="content">
+                    <table class="rc_table border rounded-3xl text-xl">
+                        <tr *ngFor="let details of data.subSkills">
+                            <td>{{details.subSkillName}}</td>
+                            <td>{{details.subSkillScore}}</td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class='download-btn'>
+        <button pButton pRipple label="{{'Download Certificate' | translate}}" (click)="download()"></button>
+    </div>
+</div>
+

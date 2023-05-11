@@ -1,0 +1,198 @@
+<div class="card" *ngIf="talents" [@fadeOutIn]>
+
+ <!-- if the length of provided data is 0 -->
+    <div *ngIf="talents.length == 0" class="text-2xl text-center">
+        {{'No Data Available' | translate}}
+    </div>
+
+    <!-- if length of provided data is > 0 -->
+    <div *ngIf="talents.length > 0">
+
+        <p-table scrollDirection="both" [scrollable]="true" responsiveLayout="scroll" #talentsTable [value]="talents"
+            [paginator]="true" [rows]="5" [alwaysShowPaginator]="false" [showPageLinks]="false"
+            [showCurrentPageReport]="true" [showFirstLastIcon]="false" [tableStyle]="{ 'min-width': '50rem' }"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [(selection)]="selectionForApprovals" [globalFilterFields]="columnFields"
+            [rowsPerPageOptions]="[5, 10, 25, 50]">
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center flex-wrap gap-3">
+                    <button pButton
+                        *ngIf="columnFields.includes('checkBoxSelection') && selectionForApprovals.length == 0" pRipple
+                        type="button" (click)="approveAll(true)">{{'Approve All' | translate}}</button>
+                    <button pButton
+                        *ngIf="columnFields.includes('checkBoxSelection') && selectionForApprovals.length == 0" pRipple
+                        type="button" class="p-button-danger" (click)="approveAll(false)">{{'Reject All' | translate}}</button>
+                    <button pButton
+                        *ngIf="columnFields.includes('checkBoxSelection') && selectionForApprovals.length > 0" pRipple
+                        type="button" (click)="approveSelected(true)">{{'Approve' | translate}}</button>
+                    <button pButton
+                        *ngIf="columnFields.includes('checkBoxSelection') && selectionForApprovals.length > 0" pRipple
+                        type="button" class="p-button-danger" (click)="approveSelected(false)">{{'Reject' | translate}}</button>
+                    <p-multiSelect display="chip" *ngIf="programNames && tabValue == 1" placeholder="Filter By Programs"
+                        (onChange)="talentsTable.filterGlobal($event.value, 'has-programs');"
+                        (onClear)="talentsTable.clear()" [options]="programNames" [filter]="true" [showClear]="true"
+                        class="multiselect-custom">
+                        <ng-template let-program pTemplate="item">
+                            <div class="flex align-items-center">
+                                <span class="ml-2">{{program.label}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                    <p-multiSelect display="chip" *ngIf="tabValue == 2" placeholder="Filter By Grades"
+                        (onChange)="talentsTable.filterGlobal($event.value, 'has-grades');"
+                        (onClear)="talentsTable.clear()" [options]="grades" [filter]="true" [showClear]="true"
+                        class="multiselect-custom">
+                        <ng-template let-grade pTemplate="item">
+                            <div class="flex align-items-center">
+                                <span class="ml-2">{{grade}}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                    <span class="p-input-icon-right md:ml-auto">
+                        <i *ngIf="searchInput.value != ''" (click)="talentsTable.clear(); searchInput.value = ''"
+                            class="pi pi-times cursor-pointer"></i>
+                        <i *ngIf="searchInput.value == ''" class="pi pi-search"></i>
+                        <input pInputText #searchInput type="text" (input)="searchValue($event)"
+                            placeholder="Search Talent" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 4rem" *ngIf="columnFields.includes('checkBoxSelection')">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center" pFrozenColumn>
+                            {{'ID' | translate}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            {{'Talent Name' | translate}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            {{'Email' | translate}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            {{'Gender' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('enrolledProgramNames')">
+                        <div class="flex align-items-center">
+                            {{'Enrolled Programs' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('enrolledPrograms')">
+                        <div class="flex align-items-center">
+                            {{'Enrolled Programs' | translate}} & {{'Grades' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('enrollmentApproval')">
+                        <div class="flex align-items-center">
+                            {{'Program' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('talentCRUD')">
+                        <div class="flex align-items-center">
+                            {{'Edit / Delete' | translate}}
+                        </div>
+                    </th>
+                    <th *ngIf="columnFields.includes('enrollmentApproval') || columnFields.includes('talentApproval')">
+                        <div class="flex align-items-center">
+                            Approve / {{'Reject' | translate}}
+                        </div>
+                    </th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-talent let-i="rowIndex">
+                <tr>
+                    <td *ngIf="columnFields.includes('checkBoxSelection')">
+                        <p-tableCheckbox [value]="talent"></p-tableCheckbox>
+                    </td>
+                    <td pFrozenColumn>{{ talent.credentials.id }}</td>
+                    <td>
+                        <div class="flex gap-2 align-items-center">
+                            <p-avatar (onImageError)="appUI.imageError($event)"
+                                [image]="(talent.otherDetails.profileImage && talent.otherDetails.profileImage !== '') ? imageBaseURL + talent.otherDetails.profileImage: 'assets/images/placeholders/profile-icon.jpg'"
+                                size="large" shape="circle"></p-avatar>
+                            <span class="cursor-pointer" [routerLink]="['view', talent.credentials.id]">
+                                {{ talent.personalDetails.name }}
+                            </span>
+                        </div>
+                    </td>
+                    <td>{{ talent.credentials.email }}</td>
+                    <td>{{ talent.personalDetails.gender }}</td>
+
+                    <td *ngIf="columnFields.includes('enrolledProgramNames')">
+                        {{ talent.enrolledProgramNames }}
+                    </td>
+
+                    <td *ngIf="columnFields.includes('enrollmentApproval')">
+                        {{ talent.enrolledPrograms[0].name }}
+                    </td>
+
+                    <td *ngIf="columnFields.includes('enrolledPrograms')">
+                        {{talent.enrolledPrograms[0].name}}:
+                        <span *ngIf="talent.enrolledPrograms[0].grades.overallGrades == null">
+                            {{talent.enrolledPrograms[0].grades.overallGrades}}
+                        </span>
+                        <span *ngIf="talent.enrolledPrograms[0].grades.overallGrades !== null">
+                            -
+                        </span>
+                    </td>
+
+                    <td *ngIf="columnFields.includes('talentCRUD')">
+                        <div class="flex gap-2">
+                            <button pButton pRipple type="button" [routerLink]="['edit', talent.credentials.id]"
+                                icon="pi pi-pencil" class="p-button-rounded"></button>
+                            <button pButton pRipple type="button" icon="pi pi-trash"
+                                (click)="deleteTalent(talent.personalDetails.name, talent.credentials.id, i)"
+                                class="p-button-rounded p-button-danger"></button>
+                        </div>
+                    </td>
+
+                    <td *ngIf="columnFields.includes('enrollmentApproval')">
+                        <div class="flex gap-2">
+                            <button pButton pRipple [loading]="isApproving" type="button" icon="pi pi-check"
+                                (click)="approveSingle(talent.credentials.id, true, i)" class="p-button-rounded"></button>
+                            <button pButton pRipple type="button" icon="pi pi-times" [loading]="isApproving"
+                                (click)="approveSingle(talent.credentials.id, false, i)"
+                                class="p-button-rounded p-button-danger"></button>
+                        </div>
+                    </td>
+
+                    <td *ngIf="columnFields.includes('talentApproval')">
+                        <div class="flex gap-2">
+                            <button pButton pRipple [loading]="isApproving" type="button" icon="pi pi-check"
+                                (click)="approveSingle(talent.credentials.id, true, i)" class="p-button-rounded"></button>
+                            <button pButton pRipple [loading]="isApproving" type="button" icon="pi pi-times"
+                                (click)="approveSingle(talent.credentials.id, false, i)"
+                                class="p-button-rounded p-button-danger"></button>
+                        </div>
+                    </td>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="5">{{'No data found' | translate}}.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<div *ngIf="!talents">
+    <shared-table-skeleton></shared-table-skeleton>
+</div>
+
+<p-confirmDialog header="Delete" key="confirm1" icon="pi pi-exclamation-triangle"
+    message="Are you sure you want to proceed?" [style]="{width: '350px'}" acceptButtonStyleClass="p-button-text"
+    rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
